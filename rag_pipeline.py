@@ -11,9 +11,10 @@ from langchain.docstore.document import Document
 from langchain_community.document_loaders import PyPDFLoader
 from data_chunking import load_and_chunk_pdfs
 from config import OPENAI_API_KEY, EMBEDDING_MODEL, LLM_MODEL, FAISS_DIR
-import openai
+from openai import OpenAI
+from config import OPENAI_API_KEY
 
-openai.api_key = OPENAI_API_KEY
+client = OpenAI(api_key=OPENAI_API_KEY)
 
 embedding_model = OpenAIEmbeddings(model=EMBEDDING_MODEL)
 
