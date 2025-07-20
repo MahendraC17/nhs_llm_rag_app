@@ -1,7 +1,7 @@
-import os
 import streamlit as st
+import openai
 
-OPENAI_API_KEY = st.secrets["OPENAI_API_KEY"]
+openai.api_key = st.secrets["openai"]["api_key"]
 EMBEDDING_MODEL = "text-embedding-3-small"
 LLM_MODEL = "gpt-4.1-nano-2025-04-14"
 
