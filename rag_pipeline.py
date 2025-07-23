@@ -14,7 +14,7 @@ from config import OPENAI_API_KEY, EMBEDDING_MODEL, LLM_MODEL, FAISS_DIR
 from openai import OpenAI
 from config import OPENAI_API_KEY
 
-client = OpenAI(api_key=OPENAI_API_KEY)
+os.environ["OPENAI_API_KEY"] = OPENAI_API_KEY
 
 embedding_model = OpenAIEmbeddings(model=EMBEDDING_MODEL)
 

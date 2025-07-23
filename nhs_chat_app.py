@@ -1,8 +1,7 @@
 import streamlit as st
 from rag_pipeline import qa_chain
-  # import your working chain
 
-st.set_page_config(page_title="RAG Q&A", layout="centered")
+st.set_page_config(page_title="NHS Health A -Z", layout="centered")
 st.title("🔍 Ask Your Medical Question")
 
 user_query = st.text_input("Enter your question:")
