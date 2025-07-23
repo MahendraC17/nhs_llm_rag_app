@@ -39,7 +39,7 @@ llm = ChatOpenAI(
 # Created a template to reject any unrelated queries
 prompt = PromptTemplate(template=TEMPLATE, input_variables=["context", "question"])
 
-qa_chain = RetrievalQAWithSourcesChain.from_chain_type(
+chat_chain = RetrievalQAWithSourcesChain.from_chain_type(
     llm=llm,
     chain_type="stuff",
     retriever=vectorstore.as_retriever(),
