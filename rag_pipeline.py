@@ -8,8 +8,10 @@ import os
 from langchain.embeddings import OpenAIEmbeddings
 from langchain.vectorstores import FAISS
 from langchain_openai import OpenAIEmbeddings, ChatOpenAI
+from langchain.chains import RetrievalQAWithSourcesChain
+from langchain.prompts import PromptTemplate
 from data_chunking import load_and_chunk_pdfs
-from config import OPENAI_API_KEY, EMBEDDING_MODEL, LLM_MODEL, FAISS_DIR
+from config import OPENAI_API_KEY, EMBEDDING_MODEL, LLM_MODEL, FAISS_DIR, TEMPLATE
 from config import OPENAI_API_KEY
 
 os.environ["OPENAI_API_KEY"] = OPENAI_API_KEY
@@ -34,12 +36,15 @@ llm = ChatOpenAI(
     temperature=0
 )
 
-from langchain.chains import RetrievalQAWithSourcesChain
+# Created a template to reject any unrelated queries
+prompt = PromptTemplate(template=TEMPLATE, input_variables=["context", "question"])
 
-chat_chain = RetrievalQAWithSourcesChain.from_chain_type(
+qa_chain = RetrievalQAWithSourcesChain.from_chain_type(
     llm=llm,
     chain_type="stuff",
-    retriever=vectorstore.as_retriever()
+    retriever=vectorstore.as_retriever(),
+    chain_type_kwargs={"prompt": prompt},
+    return_source_documents=True
 )
 
 # query = "What causes acute pancreatis? only give cause and no discription include minor causes as well"
