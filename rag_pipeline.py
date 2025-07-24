@@ -37,7 +37,7 @@ llm = ChatOpenAI(
 )
 
 # Created a template to reject any unrelated queries
-prompt = PromptTemplate(template=TEMPLATE, input_variables=["context", "question"])
+prompt = PromptTemplate(template=TEMPLATE, input_variables=["summaries", "question"])
 
 chat_chain = RetrievalQAWithSourcesChain.from_chain_type(
     llm=llm,

@@ -17,8 +17,7 @@ TEMPLATE = """
         If the user asks a question unrelated to this domain, politely respond with:
         "I'm not trained to answer that. Please ask a question related to NHS diseases."
 
-        Context:
-        {context}
+        Context: {summaries}
 
         Question: {question}
         Answer:"""
