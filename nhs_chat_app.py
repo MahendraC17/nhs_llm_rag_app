@@ -10,10 +10,14 @@ if st.button("Submit") and user_query:
     with st.spinner("Fetching answer..."):
         try:
             response = chat_chain.invoke({"question": user_query})
-            st.subheader("🧠 Answer")
-            st.write(response["answer"])
+            
+            if not response["source_documents"]:
+                print("🤖 I couldn’t find anything related to that in the NHS documents.")
+            else:
+                st.subheader("🧠 Answer")
+                st.write(response["answer"])
 
-            st.subheader("📄 Sources")
-            st.write(response["sources"])
+                st.subheader("📄 Sources")
+                st.write(response["sources"])
         except Exception as e:
             st.error(f"Error: {str(e)}")
