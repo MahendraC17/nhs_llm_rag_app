@@ -6,3 +6,4 @@ langchain-community
 faiss-cpu
 PyMuPDF
 rank-bm25
+pypdf
