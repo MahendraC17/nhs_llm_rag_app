@@ -25,7 +25,6 @@ TEMPLATE = """
         - Concise bullet points for clarity
         - Include self-care guidance (if relevant)
         - Highlight any red-flag symptoms that require urgent medical attention using [Red Flag] tags
-        - Always include the disclaimer at the end
 
         Context:
         {summaries}
