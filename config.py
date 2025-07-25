@@ -30,7 +30,7 @@ TEMPLATE = """
         - Format your response as:
         - Concise bullet points
         - Include any self-care advice mentioned in the context
-        - If the document mentions symptoms requiring urgent medical attention, highlight those using a 🚩 (Red Flag Emoji)
+        - If the document mentions symptoms requiring urgent medical attention, highlight those using a [Red Flag] tag
 
         Context:
         {summaries}
