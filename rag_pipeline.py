@@ -21,7 +21,7 @@ os.environ["OPENAI_API_KEY"] = OPENAI_API_KEY
 embedding_model = OpenAIEmbeddings(model=EMBEDDING_MODEL)
 
 # --------------------------------------------------------------------------------
-# FAISS INDEX SETUP
+# FAISS INDEX SETUP (Semantic based)
 # --------------------------------------------------------------------------------
 if not os.path.exists(f"{FAISS_DIR}/index.faiss"):
     print("Building FAISS index...")
@@ -37,7 +37,7 @@ else:
     )
 
 # --------------------------------------------------------------------------------
-# BM25 SETUP (with caching)
+# BM25 SETUP (Keyword based)
 # --------------------------------------------------------------------------------
 bm25_cache_path = os.path.join(FAISS_DIR, "bm25_cache.pkl")
 if os.path.exists(bm25_cache_path):
@@ -46,7 +46,7 @@ if os.path.exists(bm25_cache_path):
         bm25_retriever = pickle.load(f)
 else:
     print("Building BM25 retriever...")
-    all_chunks = load_and_chunk_pdfs()  # Load fresh or reuse
+    all_chunks = load_and_chunk_pdfs()
     bm25_retriever = BM25Retriever.from_documents(all_chunks)
     bm25_retriever.k = 4
     with open(bm25_cache_path, "wb") as f:
