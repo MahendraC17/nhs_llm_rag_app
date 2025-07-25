@@ -5,3 +5,4 @@ langchain-openai
 langchain-community
 faiss-cpu
 PyMuPDF
+rank-bm25
