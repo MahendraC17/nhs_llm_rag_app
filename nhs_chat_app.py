@@ -1,8 +1,8 @@
 import streamlit as st
 from rag_pipeline import chat_chain
 
-st.set_page_config(page_title="NHS Health A -Z", layout="centered")
-st.title("🔍 Ask Your Medical Question (NHS)")
+st.set_page_config(page_title="Test NHS Test", layout="centered")
+st.title("🔍 Test NHS Test")
 
 user_query = st.text_input("Enter your question:")
 

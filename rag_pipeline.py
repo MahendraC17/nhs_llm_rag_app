@@ -12,7 +12,6 @@ from langchain_openai import OpenAIEmbeddings, ChatOpenAI
 from langchain.chains import RetrievalQAWithSourcesChain
 from langchain.prompts import PromptTemplate
 from langchain.retrievers import BM25Retriever, EnsembleRetriever
-from langchain.schema import Document
 
 from data_chunking import load_and_chunk_pdfs
 from config import OPENAI_API_KEY, EMBEDDING_MODEL, LLM_MODEL, FAISS_DIR, TEMPLATE
@@ -81,7 +80,7 @@ chat_chain = RetrievalQAWithSourcesChain.from_chain_type(
     return_source_documents=True
 )
 
-# query = "What causes acute pancreatis? only give cause and no discription include minor causes as well"
+# query = "What kind of scans I need to do for acute pancreatis"
 # response = chat_chain.invoke({"question": query})
 # print(response["answer"])
 # print("Sources:", response["sources"])
