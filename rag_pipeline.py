@@ -81,7 +81,7 @@ chat_chain = RetrievalQAWithSourcesChain.from_chain_type(
 )
 
 # query = "What kind of scans I need to do for acute pancreatis"
-# query = "what should I do suddenly develop severe abdominal pain.?"
-# response = chat_chain.invoke({"question": query})
-# print(response["answer"])
-# print("Sources:", response["sources"])
+query = "what should I do suddenly develop severe abdominal pain.?"
+response = chat_chain.invoke({"question": query})
+print(response["answer"])
+print("Sources:", response["sources"])
