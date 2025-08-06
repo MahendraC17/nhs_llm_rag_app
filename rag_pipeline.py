@@ -80,7 +80,7 @@ chat_chain = RetrievalQAWithSourcesChain.from_chain_type(
     return_source_documents=True
 )
 
-# query = "How can I prevent gallstones? Send me exercise, healthy eating and managing your weight links" \
+# query = "How can I prevent gallstones? Send me exercise, healthy eating and managing your weight " \
 # ""
 # response = chat_chain.invoke({"question": query})
 # print(response["answer"])
