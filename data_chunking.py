@@ -5,24 +5,42 @@
 
 import os
 import re
+import fitz
 from langchain.document_loaders import PyPDFLoader
 from langchain.docstore.document import Document
 from langchain.text_splitter import NLTKTextSplitter
 from config import DATA_DIR
 
-def deduplicate_chunks(docs):
+def text_with_embedded_links(pdf_path):
     """
-    To not to repeat chunking process and store chunks which are already been made,
-    this function ensures it doesn't. Saves time and resources to embeded those chunks.
+    Extracting all the embedded hyperlinks from a word (If embedded)
+    and appending the extracted hyperlink at the end of the word.
     """
-    seen = set()
-    unique_docs = []
-    for doc in docs:
-        text = doc.page_content.strip()
-        if text not in seen:
-            seen.add(text)
-            unique_docs.append(doc)
-    return unique_docs
+    doc = fitz.open(pdf_path)
+    full_text = ""
+
+    for page in doc:
+        links = page.get_links()
+
+        page_text = page.get_text()
+
+        for link in links:
+            if "uri" in link and "from" in link:
+                rect = fitz.Rect(link["from"])
+                linked_text = page.get_textbox(rect).strip()
+
+                if linked_text:
+                    linked_with_url = f"{linked_text} ({link['uri']})"
+                    page_text = page_text.replace(linked_text, linked_with_url, 1)
+
+        full_text += page_text + "\n"
+    
+        # output_path = pdf_path.replace(".pdf", ".txt")
+        # with open(output_path, "w", encoding="utf-8") as f:
+        #     f.write(full_text)
+
+    return full_text
+
 
 def sentence_chunk_document(text, disease_name, source_pdf):
     """
@@ -43,6 +61,20 @@ def sentence_chunk_document(text, disease_name, source_pdf):
         ))
     return chunks
 
+def deduplicate_chunks(docs):
+    """
+    To not to repeat chunking process and store chunks which are already been made,
+    this function ensures it doesn't. Saves time and resources to embeded those chunks.
+    """
+    seen = set()
+    unique_docs = []
+    for doc in docs:
+        text = doc.page_content.strip()
+        if text not in seen:
+            seen.add(text)
+            unique_docs.append(doc)
+    return unique_docs
+
 def load_and_chunk_pdfs(pdf_folder=DATA_DIR):
     """
     Loads PDFs and returns sentence-based chunks with source metadata.
@@ -58,10 +90,9 @@ def load_and_chunk_pdfs(pdf_folder=DATA_DIR):
     for file_name in os.listdir(pdf_folder):
         if file_name.endswith(".pdf"):
             disease_name = file_name.replace("_", " ").replace(".pdf", "")
-            loader = PyPDFLoader(os.path.join(pdf_folder, file_name))
-            docs = loader.load()
 
-            full_text = "\n".join([doc.page_content for doc in docs])
+            full_text = text_with_embedded_links(os.path.join(pdf_folder, file_name))
+
             chunks = sentence_chunk_document(full_text, disease_name, f"{disease_name}.pdf")
             all_chunks.extend(chunks)
 
