@@ -27,7 +27,7 @@ TEMPLATE = """
         If relevant content is found in the context:
         - Format your response as:
         - Concise bullet points
-        - Include any self-care advice mentioned in the context
+        - Include any self-care advice mentioned in the context with hyperlinks provided in the document
         - If the document mentions symptoms requiring urgent medical attention, highlight those using a [Red Flag] tag
         - If there are any hyperlinks in the context, include them in your answer to support the user with official NHS resources
 
