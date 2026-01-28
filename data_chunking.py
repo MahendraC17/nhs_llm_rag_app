@@ -6,7 +6,7 @@
 import os
 import re
 import fitz
-from langchain.document_loaders import PyPDFLoader
+from langchain_community.document_loaders import PyPDFLoader
 from langchain.docstore.document import Document
 from langchain.text_splitter import NLTKTextSplitter
 from config import DATA_DIR

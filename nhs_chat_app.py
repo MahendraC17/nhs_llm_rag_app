@@ -22,8 +22,8 @@ if st.button("Submit") and user_query:
                     unsafe_allow_html=True
                 )
 
-                st.subheader("📄 Sources")
-                st.write(response["sources"])
+                # st.subheader("📄 Sources")
+                # st.write(response["sources"])
 
         except Exception as e:
             st.error(f"Error: {str(e)}")

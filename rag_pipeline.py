@@ -6,12 +6,16 @@
 
 import os
 import pickle
-from langchain.embeddings import OpenAIEmbeddings
-from langchain.vectorstores import FAISS
-from langchain_openai import OpenAIEmbeddings, ChatOpenAI
+from langchain_community.embeddings import OpenAIEmbeddings
+from langchain_community.vectorstores import FAISS
+from langchain_community.retrievers import BM25Retriever
+from langchain.retrievers import EnsembleRetriever
+
+from langchain_openai import ChatOpenAI
 from langchain.chains import RetrievalQAWithSourcesChain
 from langchain.prompts import PromptTemplate
-from langchain.retrievers import BM25Retriever, EnsembleRetriever
+
+
 
 from data_chunking import load_and_chunk_pdfs
 from config import OPENAI_API_KEY, EMBEDDING_MODEL, LLM_MODEL, FAISS_DIR, TEMPLATE
@@ -80,8 +84,7 @@ chat_chain = RetrievalQAWithSourcesChain.from_chain_type(
     return_source_documents=True
 )
 
-# query = "How can I prevent gallstones? Send me exercise, healthy eating and managing your weight " \
-# ""
-# response = chat_chain.invoke({"question": query})
-# print(response["answer"])
+query = "What is autism? What if I'm bit anxious and get distressed easily,am i one?"
+response = chat_chain.invoke({"question": query})
+print(response["answer"])
 # print("Sources:", response["sources"])
