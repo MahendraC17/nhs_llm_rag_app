@@ -7,8 +7,8 @@ import os
 import re
 import fitz
 from langchain_community.document_loaders import PyPDFLoader
-from langchain.docstore.document import Document
-from langchain.text_splitter import NLTKTextSplitter
+from langchain_core.documents import Document
+from langchain_text_splitters import NLTKTextSplitter
 from config import DATA_DIR
 
 def text_with_embedded_links(pdf_path):

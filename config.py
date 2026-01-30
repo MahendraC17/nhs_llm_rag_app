@@ -33,7 +33,7 @@ TEMPLATE = """
         - Always end the response with 'Source : (Name of the diease)' which should be embedded hyperlink of the same diease name
 
         Context:
-        {summaries}
+        {context}
 
         Question:
         {question}
