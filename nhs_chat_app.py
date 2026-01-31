@@ -1,9 +1,40 @@
 import streamlit as st
 from rag_pipeline import chat_chain
+from config import DATA_DIR
+import os
 
-st.set_page_config(page_title="NHS Health A -Z", layout="centered")
-st.title("🔍 Ask Your Medical Question")
+# --------------------------------------------------
+# Helpers
+# --------------------------------------------------
+def get_available_conditions(data_dir=DATA_DIR):
+    return sorted(
+        f.replace("_", " ").replace(".pdf", "")
+        for f in os.listdir(data_dir)
+        if f.endswith(".pdf")
+    )
 
+# --------------------------------------------------
+# Page setup
+# --------------------------------------------------
+st.set_page_config(page_title="NHS Disease Information Chatbot", layout="centered")
+st.title("🔍 NHS Disease Information Chatbot")
+
+# --------------------------------------------------
+# Sidebar: Available Conditions
+# --------------------------------------------------
+conditions = get_available_conditions()
+
+with st.sidebar:
+    st.header("📊 Available Conditions")
+    st.metric("Total conditions", len(conditions))
+
+    st.markdown("**Covered diseases / conditions:**")
+    for condition in conditions:
+        st.markdown(f"- {condition}")
+
+# --------------------------------------------------
+# Main Query UI
+# --------------------------------------------------
 user_query = st.text_input("Enter your question:")
 
 if st.button("Submit") and user_query:
