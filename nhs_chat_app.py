@@ -15,11 +15,13 @@ def get_available_conditions(data_dir=settings.data_dir):
         if f.endswith(".pdf")
     )
 
+
 # --------------------------------------------------
 # Page setup
 # --------------------------------------------------
 st.set_page_config(page_title="NHS Disease Information Chatbot", layout="centered")
 st.title("🔍 NHS Disease Information Chatbot")
+
 
 # --------------------------------------------------
 # Sidebar: Available Conditions
@@ -33,6 +35,7 @@ with st.sidebar:
     st.markdown("**Covered diseases / conditions:**")
     for condition in conditions:
         st.markdown(f"- {condition}")
+
 
 # --------------------------------------------------
 # Main Query UI

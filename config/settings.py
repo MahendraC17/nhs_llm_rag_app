@@ -65,8 +65,7 @@ class Settings(BaseSettings):
             raise ValueError("OPENAI_API_KEY cannot be empty")
         return v
 
-    # 🔴 THIS IS THE IMPORTANT PART
     model_config = SettingsConfigDict(
         env_file=".env",
-        extra="ignore"   # ignore raw ENV keys like OPENAI_API_KEY
+        extra="ignore"
     )
