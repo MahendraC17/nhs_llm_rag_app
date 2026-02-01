@@ -10,21 +10,18 @@ from langchain_core.runnables import RunnableLambda, RunnablePassthrough
 from langchain_core.output_parsers import StrOutputParser
 
 from data_chunking import load_and_chunk_pdfs
-from config import (
-    OPENAI_API_KEY,
-    EMBEDDING_MODEL,
-    LLM_MODEL,
-    FAISS_DIR,
-    TEMPLATE
-)
+from config.settings import Settings
+
+settings = Settings()
+
 
 def get_embedding_model():
-    if not OPENAI_API_KEY:
+    if not settings.openai_api_key:
         raise ValueError("OPENAI_API_KEY is not set")
 
     return OpenAIEmbeddings(
-        model=EMBEDDING_MODEL,
-        api_key=OPENAI_API_KEY
+        model=settings.embedding_model,
+        api_key=settings.openai_api_key
     )
 
 
@@ -33,7 +30,7 @@ def build_faiss_index():
     docs = load_and_chunk_pdfs()
 
     vectorstore = FAISS.from_documents(docs, embedding_model)
-    vectorstore.save_local(FAISS_DIR)
+    vectorstore.save_local(settings.faiss_dir)
 
     return vectorstore
 
@@ -45,8 +42,8 @@ def load_faiss_index():
     embedding_model = get_embedding_model()
 
     return FAISS.load_local(
-        FAISS_DIR,
-        embedding_model,
+        settings.faiss_dir,
+        get_embedding_model(),
         allow_dangerous_deserialization=True
     )
 
@@ -54,14 +51,24 @@ def get_retriever(k: int = 5):
     """
     Load FAISS index and return retriever.
     """
-    if not os.path.exists(os.path.join(FAISS_DIR, "index.faiss")):
+    if not os.path.exists(os.path.join(settings.faiss_dir, "index.faiss")):
         raise FileNotFoundError("FAISS index not found. Building it.")
 
     vectorstore = load_faiss_index()
     return vectorstore.as_retriever(search_kwargs={"k": k})
 
 def format_docs(docs):
-    return "\n\n".join(doc.page_content for doc in docs)
+    formatted = []
+
+    for doc in docs:
+        disease = doc.metadata.get("disease", "Unknown")
+        formatted.append(
+            f"[Disease: {disease}]\n{doc.page_content}"
+        )
+
+    return "\n\n".join(formatted)
+
+
 
 def get_rag_chain():
     """
@@ -69,13 +76,13 @@ def get_rag_chain():
     """
     retriever = get_retriever()
     llm = ChatOpenAI(
-        model=LLM_MODEL,
+        model=settings.llm_model,
         temperature=0,
-        api_key=OPENAI_API_KEY
-        )
+        api_key=settings.openai_api_key
+    )
     
     prompt = PromptTemplate(
-        template=TEMPLATE,
+        template=settings.prompt_template,
         input_variables=["context", "question"]
         )
 

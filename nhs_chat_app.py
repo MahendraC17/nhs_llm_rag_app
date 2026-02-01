@@ -1,12 +1,14 @@
+import os
 import streamlit as st
 from rag_pipeline import chat_chain
-from config import DATA_DIR
-import os
+from config.settings import Settings
+
+settings = Settings()
 
 # --------------------------------------------------
 # Helpers
 # --------------------------------------------------
-def get_available_conditions(data_dir=DATA_DIR):
+def get_available_conditions(data_dir=settings.data_dir):
     return sorted(
         f.replace("_", " ").replace(".pdf", "")
         for f in os.listdir(data_dir)

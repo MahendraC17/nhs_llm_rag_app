@@ -9,7 +9,9 @@ import fitz
 from langchain_community.document_loaders import PyPDFLoader
 from langchain_core.documents import Document
 from langchain_text_splitters import NLTKTextSplitter
-from config import DATA_DIR
+from config.settings import Settings
+
+settings = Settings()
 
 def text_with_embedded_links(pdf_path):
     """
@@ -75,7 +77,7 @@ def deduplicate_chunks(docs):
             unique_docs.append(doc)
     return unique_docs
 
-def load_and_chunk_pdfs(pdf_folder=DATA_DIR):
+def load_and_chunk_pdfs(pdf_folder=settings.data_dir):
     """
     Loads PDFs and returns sentence-based chunks with source metadata.
 
