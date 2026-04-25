@@ -9,6 +9,7 @@ from langchain_core.prompts import PromptTemplate
 from langchain_core.runnables import RunnableLambda, RunnablePassthrough
 from langchain_core.output_parsers import StrOutputParser
 
+from retrieval.hybrid_engine import HybridRetriever
 from data_chunking import load_and_chunk_pdfs
 from config.settings import Settings
 
@@ -47,15 +48,15 @@ def load_faiss_index():
         allow_dangerous_deserialization=True
     )
 
-def get_retriever(k: int = 5):
-    """
-    Load FAISS index and return retriever.
-    """
-    if not os.path.exists(os.path.join(settings.faiss_dir, "index.faiss")):
-        raise FileNotFoundError("FAISS index not found. Building it.")
+# def get_retriever(k: int = 5):
+#     """
+#     Load FAISS index and return retriever.
+#     """
+#     if not os.path.exists(os.path.join(settings.faiss_dir, "index.faiss")):
+#         raise FileNotFoundError("FAISS index not found. Building it.")
 
-    vectorstore = load_faiss_index()
-    return vectorstore.as_retriever(search_kwargs={"k": k})
+#     vectorstore = load_faiss_index()
+#     return vectorstore.as_retriever(search_kwargs={"k": k})
 
 def format_docs(docs):
     formatted = []
@@ -74,7 +75,8 @@ def get_rag_chain():
     """
     Construct and return the RAG LCEL chain.
     """
-    retriever = get_retriever()
+
+    hybrid = HybridRetriever()  
     llm = ChatOpenAI(
         model=settings.llm_model,
         temperature=0,
@@ -87,8 +89,8 @@ def get_rag_chain():
         )
 
     return (
-        {
-            "context": retriever | RunnableLambda(format_docs),
+            {
+            "context": RunnableLambda(lambda q: format_docs(hybrid.search(q))),
             "question": RunnablePassthrough()
         }
         | prompt
