@@ -76,7 +76,7 @@ def get_rag_chain():
     Construct and return the RAG LCEL chain.
     """
 
-    hybrid = HybridRetriever()  
+    hybrid = HybridRetriever()
     llm = ChatOpenAI(
         model=settings.llm_model,
         temperature=0,
@@ -90,7 +90,7 @@ def get_rag_chain():
 
     return (
             {
-            "context": RunnableLambda(lambda q: format_docs(hybrid.search(q))),
+            "context": RunnableLambda(lambda q: format_docs(HybridRetriever().search(q))),
             "question": RunnablePassthrough()
         }
         | prompt

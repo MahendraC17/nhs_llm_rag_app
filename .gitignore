@@ -1,3 +1,4 @@
 .env
 __pycache__/
 .faiss_nhs_sections/
+/.vscode

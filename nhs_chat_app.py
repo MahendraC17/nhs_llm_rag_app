@@ -1,6 +1,7 @@
 import os
 import streamlit as st
 from rag_pipeline import chat_chain
+from rag_pipeline import build_faiss_index
 from config.settings import Settings
 
 settings = Settings()
@@ -29,12 +30,20 @@ st.title("🔍 NHS Disease Information Chatbot")
 conditions = get_available_conditions()
 
 with st.sidebar:
-    st.header("📊 Available Conditions")
+    st.header("Available Conditions")
     st.metric("Total conditions", len(conditions))
 
     st.markdown("**Covered diseases / conditions:**")
     for condition in conditions:
         st.markdown(f"- {condition}")
+
+    if st.button("Rebuild Index"):
+        with st.spinner("Rebuilding FAISS index..."):
+            try:
+                build_faiss_index()
+                st.success("FAISS index rebuilt successfully.")
+            except Exception as e:
+                st.error(f"Rebuild failed: {str(e)}")
 
 
 # --------------------------------------------------
