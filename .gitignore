@@ -3,3 +3,4 @@ __pycache__/
 .faiss_nhs_sections/
 /.vscode
 /.devcontainer
+test.py
