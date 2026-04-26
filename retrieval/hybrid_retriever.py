@@ -18,12 +18,12 @@ class HybridRetriever:
         scored = {}
 
         for rank, doc in enumerate(dense_docs):
-            key = doc.page_content
+            key = (doc.page_content, doc.metadata.get("source", ""))
             score = 1 / (rank + 1) 
             scored[key] = scored.get(key, 0) + (0.7 * score)
 
         for rank, doc in enumerate(sparse_docs):
-            key = doc.page_content
+            key = (doc.page_content, doc.metadata.get("source", ""))
             score = 1 / (rank + 1)
             scored[key] = scored.get(key, 0) + (0.3 * score)
 

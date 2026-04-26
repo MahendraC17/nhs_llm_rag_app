@@ -2,7 +2,9 @@ import streamlit as st
 import os
 
 from services.rag_service import RAGService
-from config import DATA_DIR
+# from config import DATA_DIR
+
+# os.environ["OPENAI_API_KEY"] = st.secrets["openai"]["api_key"]
 
 rag_service = RAGService()
 # --------------------------------------------------
