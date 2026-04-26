@@ -33,10 +33,10 @@ with st.sidebar:
     st.metric("Total conditions", len(conditions))
 
     st.markdown("**Covered diseases & conditions:**")
-    st.caption("The application only includes some diseases & conditions because scraping them was done manually and was tedious, also "
-    "it serves purpose for testing and deploying with limitation of token strength for embeddings and responses.")
     for condition in conditions:
         st.markdown(f"- {condition}")
+    st.caption("The application only includes some diseases & conditions because scraping them was done manually and was tedious, also "
+    "it serves purpose for testing and deploying with limitation of token strength for embeddings and responses.")
 
 # --------------------------------------------------
 # Main Query UI
