@@ -1,8 +1,10 @@
 import streamlit as st
-from rag_pipeline import chat_chain
-from config import DATA_DIR
 import os
 
+from services.rag_service import RAGService
+from config import DATA_DIR
+
+rag_service = RAGService()
 # --------------------------------------------------
 # Helpers
 # --------------------------------------------------
@@ -25,10 +27,12 @@ st.title("🔍 NHS Disease Information Chatbot")
 conditions = get_available_conditions()
 
 with st.sidebar:
-    st.header("📊 Available Conditions")
+    st.header("Available Conditions")
     st.metric("Total conditions", len(conditions))
 
-    st.markdown("**Covered diseases / conditions:**")
+    st.markdown("**Covered diseases & conditions:**")
+    st.caption("The application only includes some diseases & conditions because scraping them was done manually and was tedious, also "
+    "it serves purpose for testing and deploying with limitation of token strength for embeddings and responses.")
     for condition in conditions:
         st.markdown(f"- {condition}")
 
@@ -40,14 +44,14 @@ user_query = st.text_input("Enter your question:")
 if st.button("Submit") and user_query:
     with st.spinner("Fetching answer..."):
         try:
-            response = chat_chain.invoke(user_query)
+            response = rag_service.query(user_query)
 
             if not response or not response.strip():
                 st.warning(
-                    "🤖 I couldn’t find anything relevant to that in the NHS documents."
+                    "I couldn’t find anything relevant to that in the NHS documents."
                 )
             else:
-                st.subheader("🧠 Answer")
+                st.subheader("Answer")
                 st.write(response)
 
                 st.markdown(

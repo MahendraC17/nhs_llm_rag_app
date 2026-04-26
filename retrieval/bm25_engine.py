@@ -1,0 +1,31 @@
+import re
+from nltk.tokenize import word_tokenize
+from rank_bm25 import BM25Okapi
+
+from retrieval.data_loader import get_documents
+
+class BM25Engine:
+    def __init__(self):
+        self.docs = get_documents()
+        self.texts = [doc.page_content for doc in self.docs]
+
+        self.tokenized = [self._clean_and_tokenize(text) for text in self.texts]
+        self.bm25 = BM25Okapi(self.tokenized)
+
+    def _clean_and_tokenize(self, text):
+        text = text.lower()
+        text = re.sub(r"[^\w\s]", " ", text)
+        tokens = word_tokenize(text)
+        return tokens
+
+    def search(self, query, k=5):
+        tokenized_query = self._clean_and_tokenize(query)
+        scores = self.bm25.get_scores(tokenized_query)
+
+        top_idx = sorted(
+            range(len(scores)),
+            key=lambda i: scores[i],
+            reverse=True
+        )[:k]
+
+        return [self.docs[i] for i in top_idx]
