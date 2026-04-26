@@ -1,6 +1,7 @@
 from data_chunking import load_and_chunk_pdfs
 import nltk
 nltk.download("punkt")
+nltk.download("punkt_tab")
 
 _docs_cache = None
 
