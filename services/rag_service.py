@@ -1,13 +1,13 @@
 # --------------------------------------------------------------------------------
 # RAG SERVICE - Orchestrating retrieval andd generation
 # --------------------------------------------------------------------------------
-
 from langchain_openai import ChatOpenAI
 from langchain_core.prompts import PromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 import os
 
 from retrieval.hybrid_retriever import HybridRetriever
+from services.guardrails import is_valid_context, is_valid_response
 from config import LLM_MODEL, TEMPLATE, OPENAI_API_KEY
 
 
@@ -28,6 +28,14 @@ class RAGService:
 
     def query(self, user_query):
         docs = self.retriever.search(user_query)
+
+        # --------------------------------------------------------------------------------
+        # Context validation - guarddrail
+        # --------------------------------------------------------------------------------
+
+        if not is_valid_context(docs, user_query):
+            return "I don't have enough relevant NHS information to answer that safely."
+
         context = self._format_docs(docs)
 
         response = (
@@ -38,5 +46,12 @@ class RAGService:
             "context": context,
             "question": user_query
         })
+
+        # --------------------------------------------------------------------------------
+        # Response validation - guarddrail
+        # --------------------------------------------------------------------------------
+
+        if not is_valid_response(response):
+            return "I'm not confident enough to provide a reliable NHS provided answer for that."
 
         return response
