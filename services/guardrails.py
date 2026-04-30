@@ -9,24 +9,46 @@ def is_valid_context(docs, query):
     if not docs:
         return False
 
-    query_terms = set(query.lower().split())
 
-    strong_match_count = 0
+    diseases = [d.metadata.get("disease", "").lower() for d in docs if d.metadata]
 
-    for d in docs:
-        doc_terms = set(d.page_content.lower().split())
-
-        overlap = query_terms.intersection(doc_terms)
-
-        # requiring stronger overlap
-        if len(overlap) >= 3:
-            strong_match_count += 1
-
-    # requiring atleast 2 strong mathces
-    if strong_match_count < 2:
+    if not diseases:
         return False
 
-    return True
+    disease_counts = {}
+    for d in diseases:
+        disease_counts[d] = disease_counts.get(d, 0) + 1
+
+    dominant_disease = max(disease_counts, key=disease_counts.get)
+    dominant_count = disease_counts[dominant_disease]
+
+    # Here it should have at least 2 docs from same disease
+    if dominant_count < 2:
+        return False
+
+    if dominant_count >= 3:
+        return True
+
+    STOPWORDS = {
+        "what", "how", "is", "the", "a", "an", "do", "does", "did",
+        "i", "you", "we", "they", "it", "to", "of", "in", "on", "for",
+        "with", "and", "or", "by", "this", "that", "are", "was", "were"
+    }
+
+    query_tokens = set(
+        word for word in query.lower().split()
+        if word not in STOPWORDS and len(word) > 2
+    )
+
+    if not query_tokens:
+        return False
+
+    for d in docs:
+        doc_tokens = set(d.page_content.lower().split())
+        if query_tokens.intersection(doc_tokens):
+            return True
+
+    return False
 
 
 def is_valid_response(response):
