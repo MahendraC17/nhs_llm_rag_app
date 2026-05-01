@@ -8,6 +8,7 @@ import os
 
 from retrieval.hybrid_retriever import HybridRetriever
 from services.guardrails import is_valid_context, is_valid_response
+from services.grounding import filter_to_dominant_disease, is_grounded_response, has_external_links, is_valid_source
 from config import LLM_MODEL, TEMPLATE, OPENAI_API_KEY
 
 
@@ -28,6 +29,9 @@ class RAGService:
 
     def query(self, user_query):
         docs = self.retriever.search(user_query)
+
+        # enforce single-disease context
+        docs = filter_to_dominant_disease(docs)
 
         # --------------------------------------------------------------------------------
         # Context validation - guarddrail
@@ -51,7 +55,20 @@ class RAGService:
         # Response validation - guarddrail
         # --------------------------------------------------------------------------------
 
+        # response check
         if not is_valid_response(response):
             return "I'm not confident enough to provide a reliable NHS provided answer for that."
+
+        # blocking external links
+        if has_external_links(response):
+            return "I don't have enough relevant NHS information to answer that safely."
+
+        # enforcing grounding
+        if not is_grounded_response(response, docs):
+            return "I don't have enough relevant NHS information to answer that safely."
+
+        # enforcing source correctness
+        if not is_valid_source(response, docs):
+            return "I don't have enough relevant NHS information to answer that safely."
 
         return response
