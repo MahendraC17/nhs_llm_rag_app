@@ -10,7 +10,7 @@ except LookupError:
     nltk.download("punkt")
     nltk.download("punkt_tab")
 
-@st.cache_resource
+@st.cache_resource(show_spinner=False)
 def get_documents():
     docs = load_and_chunk_pdfs()
     print(f"FAISS index path: {FAISS_DIR}")
