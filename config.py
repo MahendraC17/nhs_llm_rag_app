@@ -28,8 +28,7 @@ TEMPLATE = """
         - Concise bullet points
         - Include any self-care advice mentioned in the context
         - If the document mentions symptoms requiring urgent medical attention, highlight those using a [Red Flag] tag
-        - If there are any hyperlinks in the context, include them in your answer to support the user with official NHS resources
-        - Always end the response with 'Source : (Name of the diease)' which should be NHS embedded hyperlink ( https://www.nhs.uk ) of the same diease name
+        - Always end the response with 'Source : (Name of the disease)'. Do NOT include any URLs or hyperlinks in your answer
 
         Context:
         {context}
