@@ -2,7 +2,7 @@ import re
 from nltk.tokenize import word_tokenize
 from rank_bm25 import BM25Okapi
 
-from retrieval.data_loader import get_documents
+from ingestion.data_loader import get_documents
 
 class BM25Engine:
     def __init__(self):

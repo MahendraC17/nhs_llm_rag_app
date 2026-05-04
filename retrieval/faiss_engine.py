@@ -6,7 +6,7 @@ import os
 import hashlib
 from langchain_community.vectorstores import FAISS
 from langchain_openai import OpenAIEmbeddings
-from retrieval.data_loader import get_documents
+from ingestion.data_loader import get_documents
 
 from config import EMBEDDING_MODEL, FAISS_DIR, OPENAI_API_KEY
 FINGERPRINT_FILE = "faiss_nhs_sections/fingerprint.txt"

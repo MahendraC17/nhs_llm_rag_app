@@ -1,7 +1,7 @@
 import nltk
 import streamlit as st
 
-from data_chunking import load_and_chunk_pdfs
+from ingestion.data_chunking import load_and_chunk_pdfs
 from config import FAISS_DIR
 
 try:
