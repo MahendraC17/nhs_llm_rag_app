@@ -1,0 +1,30 @@
+query,expected_disease,type
+What are the symptoms of asthma?,asthma,normal
+How is angina treated?,angina,normal
+Causes of appendicitis,appendicitis,normal
+Symptoms of arthritis,arthritis,normal
+What is atrial fibrillation?,atrial fibrillation,normal
+Signs of ADHD in children,adhd in children and young people,normal
+Treatment for iron deficiency anaemia,iron deficiency anaemia,normal
+What causes vitamin B12 deficiency anaemia?,vitamin b12 or folate deficiency anaemia,normal
+Symptoms of acute pancreatitis,acute pancreatitis,normal
+What is Addison's disease?,addison's disease,normal
+How is plantar fasciitis treated?,plantar fasciitis,normal
+What is albinism?,albinism,normal
+Symptoms of autism,autism,normal
+Treatment for chemical burns,acid and chemical burns,normal
+What is the capital of Germany?,,refusal
+How do I invest money?,,refusal
+Tell me a joke,,refusal
+Best phone to buy in 2025,,refusal
+Why is the sky blue?,,refusal
+pain in heel when I wake up,plantar fasciitis,normal
+irregular heartbeat and dizziness,atrial fibrillation,normal
+joint stiffness in the morning,arthritis,normal
+yellowing of skin and tiredness,,refusal
+chest pain and shortness of breath,angina,normal
+fatigue and pale skin,addison's disease,normal
+my child can't focus and is very restless,adhd in children and young people,normal
+burn from acid on skin what to do,acid and chemical burns,normal
+how to lose weight,,refusal
+how to sleep better,,refusal

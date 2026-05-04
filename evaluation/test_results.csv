@@ -1,0 +1,186 @@
+query,expected_disease,type,response,response_length,is_refusal,predicted_disease
+What are the symptoms of asthma?,asthma,normal,"- Wheezing
+- Coughing
+- Shortness of breath
+- Chest feeling tight
+
+Asthma symptoms can be mild or severe, and they usually come and go. They may be worse at night and early in the morning. During an asthma attack, symptoms become severe and breathing becomes difficult, which can be life-threatening.
+
+Source : Asthma",317,False,asthma
+How is angina treated?,angina,normal,"- If diagnosed with angina and experiencing chest pain, follow these steps:
+  - Stop activity and rest.
+  - Use prescribed medicine, usually glyceryl trinitrate (GTN).
+  - Take another dose after 5 minutes if symptoms do not improve.
+  - Call 999 for an ambulance if symptoms persist 5 minutes after the second dose.
+- To help manage angina:
+  - Avoid triggers such as stress, cold temperatures, or large meals.
+  - Always carry your angina medicine and use it as instructed.
+  - Quit smoking if you smoke.
+  - Maintain a healthy weight and eat a balanced diet.
+- More information can be found in the British Heart Foundation resources linked in the context.
+
+Source : Angina",675,False,angina
+Causes of appendicitis,appendicitis,normal,"- Appendicitis is caused by something getting stuck in the appendix, such as a small piece of undigested food or hard poo.
+- This leads to infection and swelling in the appendix.
+- Source : Appendicitis",202,False,appendicitis
+Symptoms of arthritis,arthritis,normal,"- Joint pain, tenderness, and stiffness
+- Inflammation in and around the joints
+- Restricted movement of the joints
+- Warm red skin over the affected joint
+- Weakness and muscle wasting
+- In children with polyarticular JIA: feeling unwell and occasionally having a high temperature of 38°C or above
+- Symptoms of juvenile idiopathic arthritis (JIA) are similar to adult rheumatoid arthritis
+- Severe loss of cartilage can lead to bone rubbing on bone, altering joint shape and positioning
+
+Source : Arthritis",508,False,arthritis
+What is atrial fibrillation?,atrial fibrillation,normal,"- Atrial fibrillation (afib or AF) is a type of heart rhythm problem where your heartbeat is not regular.
+- It is caused by a problem with the electrical system that makes your heart beat.
+- Source: Atrial fibrillation",218,False,atrial fibrillation
+Signs of ADHD in children,adhd in children and young people,normal,"- Being easily distracted
+- Finding it hard to listen to what people are saying or to follow instructions
+- Forgetting everyday tasks, like brushing their teeth or putting on socks
+- Having high energy levels
+- Fidgeting or tapping hands and feet
+- Talking noisily
+- Feeling restless, or getting up and moving around when supposed to sit still
+- Finding it hard to wait their turn, or interrupting conversations
+
+Most children and young people with ADHD have symptoms of both inattentiveness and hyperactivity/impulsiveness. Symptoms usually start before the age of 12.
+
+Source : ADHD in children and young people",613,False,adhd in children and young people
+Treatment for iron deficiency anaemia,iron deficiency anaemia,normal,"- Once the cause of iron deficiency anaemia is identified, treatment typically involves taking iron tablets to replace the missing iron.
+- You will need to take iron tablets for about 6 months.
+- Drinking orange juice after taking the tablets may help your body absorb the iron.
+- Your GP will advise you on how to take the iron tablets.
+- Keep iron supplement tablets out of reach of children, as overdose can be fatal in young children.
+- The underlying cause of the anaemia, such as blood loss or pregnancy, may also need to be addressed.
+- If the reason for the anaemia is not clear, your GP may perform additional tests, like a faecal immunochemical test (FIT), to investigate further.
+
+Source : Iron deficiency anaemia",724,False,iron deficiency anaemia
+What causes vitamin B12 deficiency anaemia?,vitamin b12 or folate deficiency anaemia,normal,"- Vitamin B12 deficiency anaemia can be caused by pernicious anaemia, an autoimmune condition where the immune system attacks the stomach cells that produce intrinsic factor, leading to impaired absorption of vitamin B12.
+- It can also result from a deficiency of vitamin B12 in the diet.
+- Pernicious anaemia is the most common cause of vitamin B12 deficiency in the UK.
+- [Red Flag] Symptoms requiring urgent medical attention are not specified in the provided context.
+- Source : Vitamin B12 deficiency anaemia",513,False,vitamin b12 or folate deficiency anaemia
+Symptoms of acute pancreatitis,acute pancreatitis,normal,"- Sudden severe pain in the centre of your tummy (abdomen)
+- Feeling or being sick
+- A high temperature of 38°C or more (fever)
+
+Source : Acute pancreatitis",156,False,acute pancreatitis
+What is Addison's disease?,addison's disease,normal,"- Addison's disease, also known as primary adrenal insufficiency or hypoadrenalism, is a rare disorder of the adrenal glands.
+- The adrenal glands sit on top of the kidneys and produce essential hormones: cortisol and aldosterone.
+- In Addison's disease, the adrenal glands are damaged and do not produce enough of these hormones.
+- It develops when the outer layer of the adrenal glands (adrenal cortex) is damaged, often due to problems with the immune system.
+- Most common cause in the UK is a problem with the immune system.
+- Symptoms are managed with lifelong medication to replace the missing hormones.
+- With treatment, symptoms can be controlled, and most people can live a normal, active life.
+- Source : Addison's disease",733,False,addison's disease
+How is plantar fasciitis treated?,plantar fasciitis,normal,"- Usually, you can ease the pain yourself with self-care measures.
+- Rest and raise your foot on a stool when possible.
+- Apply an ice pack or frozen peas in a towel on the painful area for up to 20 minutes every 2 to 3 hours.
+- Wear shoes with cushioned heels and good arch support; use insoles or heel pads.
+- Try gentle exercises to stretch the sole of your foot and heel.
+- Engage in low-pressure activities like swimming.
+- Take painkillers such as paracetamol or ibuprofen gel/tablets if needed.
+- Aim to lose weight if overweight.
+- Avoid walking or standing for long periods, wearing high heels or tight shoes, flip-flops, backless slippers, and walking barefoot on hard surfaces.
+- A pharmacist can advise on painkillers and insoles.
+- See a GP if symptoms do not improve within 2 weeks.
+
+Source : Plantar fasciitis",824,False,plantar fasciitis
+What is albinism?,albinism,normal,"- Albinism affects the production of melanin, the pigment that colours skin, hair, and eyes.
+- It is a lifelong condition that does not get worse over time.
+- People with albinism have a reduced amount of melanin, or none at all, which can affect their colouring and eyesight.
+- Common features include very pale skin that burns easily in the sun and does not usually tan.
+- There are two main types: oculocutaneous albinism (affecting skin, hair, and eyes) and ocular albinism (mainly affecting the eyes).
+- It is usually inherited in an autosomal recessive pattern.
+- The reduced melanin can cause eye problems due to its role in retina development.
+- Diagnosis is usually obvious from a baby's appearance at birth.
+- Source : Albinism",737,False,albinism
+Symptoms of autism,autism,normal,"- Not responding to their name
+- Avoiding eye contact
+- Not smiling when you smile at them
+- Getting very upset if they do not like a certain taste, smell or sound
+- Repetitive movements, such as flapping hands, flicking fingers, or rocking
+- Not talking as much as other children
+- Not doing as much pretend play
+- Repeating the same phrases
+- In older children: difficulty understanding others' thoughts or feelings
+- Unusual speech, such as repeating phrases or talking ‘at’ others
+- Preference for a strict daily routine and upset if it changes
+- Keen interest in certain subjects or activities
+- Difficulty making friends or preferring to be alone
+- Taking things literally, e.g., not understanding phrases like ""break a leg""
+- Finding it hard to say how they feel
+
+Source : Autism",786,False,autism
+Treatment for chemical burns,acid and chemical burns,normal,"- Call 999 for medical help.
+- Wear gloves to protect yourself when helping someone else.
+- Carefully remove any clothing with the chemical on it.
+- Carefully brush dry chemicals off the skin.
+- Rinse the affected area under cool or lukewarm running water or pour lots of water over it for about 1 hour.
+- Seek medical advice as soon as possible.
+- You may need painkillers to ease pain and fluids, usually given through a vein.
+- For severe burns, treatment may include surgery to help wounds heal or reconstructive surgery if movement or appearance is affected.
+- Do not put anything on the burn, such as skin creams or other chemicals.
+
+Source : Acid and chemical burns",672,False,acid and chemical burns
+What is the capital of Germany?,,refusal,I don't have enough relevant NHS information to answer that safely.,67,True,vitamin b12 or folate deficiency anaemia
+How do I invest money?,,refusal,I don't have enough relevant NHS information to answer that safely.,67,True,autism
+Tell me a joke,,refusal,I don't have enough relevant NHS information to answer that safely.,67,True,autism
+Best phone to buy in 2025,,refusal,I don't have enough relevant NHS information to answer that safely.,67,True,addison's disease
+Why is the sky blue?,,refusal,I don't have enough relevant NHS information to answer that safely.,67,True,albinism
+pain in heel when I wake up,plantar fasciitis,normal,"- The pain is worse when you first start walking after sleeping or resting, which is a common symptom of plantar fasciitis.
+- You can try self-care measures such as resting, raising your foot, applying an ice pack, wearing supportive shoes, using insoles or heel pads, and doing gentle stretching exercises.
+- If the pain persists or worsens, see a GP for further advice.
+- Source : Plantar fasciitis",400,False,plantar fasciitis
+irregular heartbeat and dizziness,atrial fibrillation,normal,"- An irregular heartbeat can be a symptom of atrial fibrillation, which may also cause dizziness.
+- Symptoms to watch for include an irregular pulse, feeling faint, lightheaded, dizzy, or like you might faint.
+- If you experience chest pain, shortness of breath, sweating, feeling or being sick, fainting, or severe headache, seek urgent medical attention by calling 999.
+- Do not drive yourself to A&E if these severe symptoms occur.
+- Source : Atrial fibrillation",465,False,atrial fibrillation
+joint stiffness in the morning,arthritis,normal,"- Joint stiffness in the morning can be a symptom of arthritis.
+- It is associated with conditions such as osteoarthritis and rheumatoid arthritis.
+- Osteoarthritis causes pain and stiffness due to roughening and thinning of cartilage.
+- Rheumatoid arthritis, which often starts between ages 30 and 50, can also cause joint stiffness.
+- Managing joint stiffness involves protecting your joints by using larger joints as levers, spreading weight across multiple joints, and avoiding tight grips.
+- It is also important to avoid sitting in the same position for long periods and to take regular breaks to move around.
+- [Red Flag] Seek medical attention if joint stiffness is severe or accompanied by other concerning symptoms.
+Source : Arthritis",744,False,arthritis
+yellowing of skin and tiredness,,refusal,"- The provided context does not mention yellowing of the skin (jaundice) specifically.
+- Tiredness or fatigue is a common symptom, which may become more severe over time.
+- If you experience yellowing of the skin along with tiredness, it is important to seek medical attention promptly, as it may indicate a serious condition.
+- [Red Flag] Symptoms like yellowing of the skin require urgent medical evaluation.
+- Source : NHS disease information on symptoms and signs.",468,False,addison's disease
+chest pain and shortness of breath,angina,normal,"- Chest pain and shortness of breath can be symptoms of angina.
+- Angina pain may feel like tightness, squeezing, pressure, or a dull ache, and can be accompanied by feeling sick, dizzy, or sweaty.
+- These symptoms are often triggered by exercise, stress, emotion, or cold temperatures.
+- If chest pain and shortness of breath are severe, persistent, or accompanied by other symptoms such as pain spreading to the arm, neck, jaw, shoulder, stomach, or back, or if you feel sweaty, sick, or light-headed, you should call 999 immediately as it could be a heart attack.
+- For less severe or ongoing symptoms, contact your GP or call 111 for advice.
+- Source : Angina",663,False,angina
+fatigue and pale skin,addison's disease,normal,"- Fatigue and pale skin are symptoms associated with Addison's disease.
+- Other symptoms may include muscle weakness, low mood, loss of appetite, increased thirst, dizziness, and darkened skin or lips.
+- Severe cases can involve dehydration, cold clammy skin, sweating, rapid breathing, and loss of consciousness.
+- A synacthen stimulation test may be used to confirm the diagnosis if cortisol levels are low.
+- Source : Addison's disease",438,False,addison's disease
+my child can't focus and is very restless,adhd in children and young people,normal,"- Your child may be showing symptoms of ADHD, which can include difficulty concentrating and feeling restless.
+- Supportive actions include making time for physical activities they enjoy, as exercise can help manage their energy.
+- Encourage your child to get regular sleep.
+- If you are worried about ADHD affecting your child, consider talking to their teachers or a healthcare professional for further advice.
+- Most children with ADHD have symptoms of both inattention and hyperactivity.
+- A specialist can provide more information and guidance if your child has been referred to an ADHD service.
+
+Source : ADHD",615,False,adhd in children and young people
+burn from acid on skin what to do,acid and chemical burns,normal,"- Call 999 for medical help.
+- Wear gloves to protect yourself if helping someone else.
+- Carefully remove any clothing with the chemical on it.
+- Gently brush dry chemicals off the skin.
+- Rinse the affected area under cool or lukewarm running water or pour lots of water over it for about 1 hour.
+- Do not put any skin creams or other chemicals on the burn.
+- Get medical advice as soon as possible.
+- You may need painkillers and fluids, usually given through a vein.
+- For severe burns, surgery or reconstructive surgery may be necessary.
+
+Source : Acid and chemical burns",576,False,acid and chemical burns
+how to lose weight,,refusal,I don't have enough relevant NHS information to answer that safely.,67,True,arthritis
+how to sleep better,,refusal,I don't have enough relevant NHS information to answer that safely.,67,True,atrial fibrillation

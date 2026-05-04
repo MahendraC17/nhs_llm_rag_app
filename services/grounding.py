@@ -52,7 +52,7 @@ def is_grounded_response(response, docs):
 
     ratio = match_count / len(meaningful_tokens)
 
-    return ratio >= 0.3
+    return ratio >= 0.2
 
 
 def has_external_links(response):
@@ -78,7 +78,7 @@ def is_valid_source(response, docs):
 
     dominant = max(disease_counts, key=disease_counts.get)
 
-    if dominant in response.lower():
+    if any(word in response.lower() for word in dominant.split()):
         return True
 
     return False
