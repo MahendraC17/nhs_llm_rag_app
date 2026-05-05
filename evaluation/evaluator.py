@@ -1,3 +1,8 @@
+# --------------------------------------------------------------------------------
+# Evaluation Layer
+# Running end-to-end system on test set and capturing retrieval + response behavior
+# --------------------------------------------------------------------------------
+
 import csv
 import os
 from collections import Counter
@@ -15,6 +20,7 @@ class Evaluator:
         self.output_path = os.path.join("evaluation", "test_results.csv")
 
     def _is_refusal(self, response):
+        # Inferring refusal based on known response patterns
         response_lower = response.lower()
 
         if "don't have enough relevant nhs information" in response_lower:
@@ -28,6 +34,10 @@ class Evaluator:
 
         return False
 
+    # --------------------------------------------------------------------------------
+    # Evaluation Entry Point
+    # Running retrieval + generation for each query and storing structured results
+    # --------------------------------------------------------------------------------
     def run(self):
         results = []
 
@@ -39,12 +49,9 @@ class Evaluator:
                 expected_disease = row.get("expected_disease", "")
                 query_type = row.get("type", "")
 
-                # -----------------------------
-                # Single retrieval (source of truth)
-                # -----------------------------
                 docs = self.retriever.search(query)
 
-                # predicted disease from SAME docs
+                # Deriving predicted disease directly from retrieved docs
                 diseases = [
                     d.metadata.get("disease", "").lower()
                     for d in docs
@@ -56,10 +63,9 @@ class Evaluator:
                 else:
                     predicted_disease = ""
 
-                # generate response using SAME docs
+                # Passing same docs into generation to avoid retrieval drift
                 response = self.rag.query_with_docs(query, docs)
 
-                # detect refusal
                 is_refusal = self._is_refusal(response)
 
                 results.append({

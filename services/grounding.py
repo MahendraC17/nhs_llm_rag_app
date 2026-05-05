@@ -1,3 +1,8 @@
+# --------------------------------------------------------------------------------
+# Grounding Layer
+# Validating generated responses against retrieved context to ensure alignment
+# --------------------------------------------------------------------------------
+
 from collections import Counter
 
 
@@ -9,6 +14,7 @@ STOPWORDS = {
 
 
 def is_definition_query(query):
+    # Identifying queries that typically produce longer, explanatory responses
     q = query.lower()
     return any(phrase in q for phrase in ["what is", "define", "explain"])
 
@@ -28,6 +34,8 @@ def extract_dominant_disease(docs):
     return Counter(diseases).most_common(1)[0][0]
 
 
+# Narrowing context to a single disease before grounding checks
+# Prevents matching tokens across unrelated diseases
 def filter_to_dominant_disease(docs):
     dominant = extract_dominant_disease(docs)
 
@@ -47,12 +55,20 @@ def build_context_text(docs):
 def extract_meaningful_tokens(text):
     tokens = text.lower().split()
 
+    # Removing stopwords and very short tokens to reduce noise in matching
     return [
         t for t in tokens
         if t not in STOPWORDS and len(t) > 3
     ]
 
 
+# --------------------------------------------------------------------------------
+# Grounding Check Entry Point
+# Comparing response tokens against retrieved context
+#
+# Using token overlap ratio as a simple alignment signal
+# Threshold is higher for definition queries as they tend to be broader
+# --------------------------------------------------------------------------------
 def is_grounded_response(response, docs, query):
     if not response or not docs:
         return False
@@ -87,4 +103,5 @@ def is_valid_source(response, docs):
 
     response_lower = response.lower()
 
+    # Ensuring generated answer explicitly reflects the dominant disease
     return any(part in response_lower for part in dominant.split())

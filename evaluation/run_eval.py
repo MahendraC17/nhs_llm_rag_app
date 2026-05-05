@@ -1,11 +1,15 @@
+# --------------------------------------------------------------------------------
+# Evaluation Runner
+# Computing aggregate metrics from evaluation output
+# --------------------------------------------------------------------------------
+
 import csv
 import os
 
 from evaluation.evaluator import Evaluator
 
-# -------------------------
-# Run evaluation first
-# -------------------------
+
+# Running full evaluation pipeline
 evaluator = Evaluator()
 evaluator.run()
 
@@ -29,35 +33,24 @@ with open(input_path, mode="r", encoding="utf-8") as file:
         query_type = row["type"].strip()
         is_refusal = row["is_refusal"] == "True"
 
-        # -------------------------
-        # Disease accuracy
-        # -------------------------
+        # Matching dominant disease from retrieval with expected label
         if expected and predicted == expected:
             disease_correct += 1
 
-        # -------------------------
-        # Refusal accuracy
-        # -------------------------
+        # Checking whether system behaved correctly (answered vs refused)
         if query_type == "refusal" and is_refusal:
             refusal_correct += 1
         elif query_type == "normal" and not is_refusal:
             refusal_correct += 1
 
-        # -------------------------
-        # Answer rate
-        # -------------------------
+        # Counting successful answers for valid queries
         if query_type == "normal" and not is_refusal:
             answer_count += 1
 
-        # -------------------------
-        # Fail tracking
-        # -------------------------
+        # Tracking mismatches for manual inspection
         if expected and predicted != expected:
             failures.append((row["query"], predicted, expected))
 
-# -------------------------
-# Results
-# -------------------------
 
 print("\n--- EVALUATION ---\n")
 

@@ -1,8 +1,6 @@
 # --------------------------------------------------------------------------------
-# DATA INGESTION AND CHUNKING PIPELINE
-# --------------------------------------------------------------------------------
-# Reading NHS PDFs, extracting text with embedded links, splitting into structured
-# sections, and converting into chunked documents with metadata for retrieval
+# Data Ingestion & Chunking Layer
+# Extracting NHS PDFs, structuring content, and preparing chunks for retrieval
 # --------------------------------------------------------------------------------
 
 import os
@@ -12,14 +10,11 @@ from langchain_text_splitters import NLTKTextSplitter
 
 from config import DATA_DIR
 
-# --------------------------------------------------------------------------------
-# EXTRACTING TEXT WITH EMBEDDED LINKS FROM PDF
-# --------------------------------------------------------------------------------
-# Extracting text from each PDF page while preserving embedded hyperlinks
-# Replacing anchor text with text + URL format to retain reference context
-# Returning a single combined text string per document
-# --------------------------------------------------------------------------------
 
+# --------------------------------------------------------------------------------
+# Extracting text while preserving embedded links
+# Replacing anchor text with visible text + URL so reference is not lost in chunks
+# --------------------------------------------------------------------------------
 def text_with_embedded_links(pdf_path):
     doc = fitz.open(pdf_path)
     full_text = ""
@@ -43,13 +38,9 @@ def text_with_embedded_links(pdf_path):
 
 
 # --------------------------------------------------------------------------------
-# SECTION DETECTION USING FLEXIBLE KEYWORD MATCHING
+# Splitting raw document into semantic sections
+# Using keyword heuristics instead of strict headings to handle inconsistent PDFs
 # --------------------------------------------------------------------------------
-# Splitting raw text into logical sections
-# Mapping variations of headings into canonical section labels
-# Falling back to 'general' when no section match is detected
-# --------------------------------------------------------------------------------
-
 def split_into_sections(text):
 
     SECTION_MAP = {
@@ -78,6 +69,7 @@ def split_into_sections(text):
 
         for section, keywords in SECTION_MAP.items():
             for keyword in keywords:
+                # Using short line heuristic to detect section headers
                 if keyword in line_lower and len(line_clean) < 80:
                     matched_section = section
                     break
@@ -95,13 +87,9 @@ def split_into_sections(text):
 
 
 # --------------------------------------------------------------------------------
-# SECTION AWARE CHUNKING USING NLTK SPLITTER
+# Creating chunks while preserving section context
+# Keeping overlap to avoid losing meaning across sentence boundaries
 # --------------------------------------------------------------------------------
-# Splitting each section into chunks while preserving semantic grouping
-# Applying sentence based chunking with overlap to maintain context continuity
-# Attaching metadata including disease, source, and section for each chunk
-# --------------------------------------------------------------------------------
-
 def sentence_chunk_document(text, disease_name, source_pdf):
     splitter = NLTKTextSplitter(chunk_size=500, chunk_overlap=50)
 
@@ -129,12 +117,9 @@ def sentence_chunk_document(text, disease_name, source_pdf):
 
 
 # --------------------------------------------------------------------------------
-# DEDUPLICATING CHUNKS
+# Removing duplicate chunks
+# Avoiding redundant embeddings and repeated retrieval hits
 # --------------------------------------------------------------------------------
-# Removing duplicate text chunks to avoid redundant embeddings and retrieval noise
-# Reducing index size and improving retrieval efficiency
-# --------------------------------------------------------------------------------
-
 def deduplicate_chunks(docs):
     seen = set()
     unique_docs = []
@@ -149,13 +134,9 @@ def deduplicate_chunks(docs):
 
 
 # --------------------------------------------------------------------------------
-# LOADING PDF DATA AND BUILDING CHUNK COLLECTION
+# Main Ingestion Entry Point
+# Reading all PDFs, extracting content, chunking, and returning final dataset
 # --------------------------------------------------------------------------------
-# Iterating through all PDFs in the data source
-# Extracting text, applying section-aware chunking, and aggregating results
-# Performing final deduplication before returning documents for embedding
-# --------------------------------------------------------------------------------
-
 def load_and_chunk_pdfs(pdf_folder=DATA_DIR):
     all_chunks = []
 

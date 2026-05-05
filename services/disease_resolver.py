@@ -1,3 +1,8 @@
+# --------------------------------------------------------------------------------
+# Disease Resolution Layer
+# Mapping ambiguous symptom queries to a known disease within dataset
+# --------------------------------------------------------------------------------
+
 import os
 from langchain_openai import ChatOpenAI
 from langchain_core.prompts import PromptTemplate
@@ -50,6 +55,7 @@ class DiseaseResolver:
         self.chain = self.prompt | self.llm | StrOutputParser()
 
     def _load_diseases(self):
+        # Extracting disease names from dataset files to avoid external mapping
         return [
             f.replace("_", " ").replace(".pdf", "")
             for f in os.listdir(DATA_DIR)
@@ -63,6 +69,7 @@ class DiseaseResolver:
         }).strip()
 
     def _validate_output(self, result):
+        # Enforcing strict closed-set output to avoid hallucinated diseases
         if result == "NONE":
             return None
 
@@ -71,6 +78,10 @@ class DiseaseResolver:
 
         return None
 
+    # --------------------------------------------------------------------------------
+    # Main Resolver Entry Point
+    # Running constrained mapping and returning dataset aligned disease or None
+    # --------------------------------------------------------------------------------
     def match(self, query):
         result = self._invoke_llm(query)
         return self._validate_output(result)

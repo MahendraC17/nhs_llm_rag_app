@@ -1,3 +1,8 @@
+# --------------------------------------------------------------------------------
+# Query Classification Layer
+# Classifying incoming queries into intent categories before retrieval
+# --------------------------------------------------------------------------------
+
 import os
 from langchain_openai import ChatOpenAI
 from langchain_core.prompts import PromptTemplate
@@ -15,6 +20,7 @@ class QueryClassifier:
         self.chain = self.prompt | self.llm | StrOutputParser()
 
     def _build_prompt(self):
+        # Training output to a closed set to avoid unpredictable labels
         return PromptTemplate(
             template="""
                 You are a strict classifier for a medical RAG system.
@@ -49,6 +55,7 @@ class QueryClassifier:
         return self.chain.invoke({"query": query}).strip().upper()
 
     def _validate_output(self, result):
+        # Forcing output into known labels to prevent pipeline breakage
         valid_labels = ["KNOWN_DISEASE", "AMBIGUOUS_MEDICAL", "NON_MEDICAL"]
 
         if result not in valid_labels:
@@ -56,6 +63,9 @@ class QueryClassifier:
 
         return result
 
+    # --------------------------------------------------------------------------------
+    # Running LLM classification and normalizing output for downstream routing
+    # --------------------------------------------------------------------------------
     def classify(self, query):
         result = self._invoke_llm(query)
         return self._validate_output(result)

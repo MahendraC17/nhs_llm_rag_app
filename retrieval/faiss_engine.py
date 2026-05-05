@@ -1,5 +1,6 @@
 # --------------------------------------------------------------------------------
-# FAISS ENGINE - Vector Store + Retriever
+# Dense Retrieval Layer (FAISS)
+# Handling embedding-based search and index lifecycle management
 # --------------------------------------------------------------------------------
 
 import os
@@ -13,12 +14,9 @@ FINGERPRINT_FILE = "faiss_nhs_sections/fingerprint.txt"
 
 
 # --------------------------------------------------------------------------------
-# DATA FINGERPRINTING
+# Data Fingerprinting
+# Tracking dataset changes to decide whether index rebuild is required
 # --------------------------------------------------------------------------------
-# Comparing stored fingerprint with current data state
-# Triggering rebuild when mismatch if detected
-# --------------------------------------------------------------------------------
-
 def compute_fingerprint(docs):
     combined = "".join([d.page_content for d in docs])
     return hashlib.md5(combined.encode()).hexdigest()
@@ -42,7 +40,10 @@ def save_fingerprint(fp):
 class FAISSEngine:
     def __init__(self):
         os.environ["OPENAI_API_KEY"] = OPENAI_API_KEY
+
         self.embedding_model = OpenAIEmbeddings(model=EMBEDDING_MODEL)
+
+        # Loading or rebuilding index based on data state using fingerprint
         self.vectorstore = self._load_or_build_index()
         self.retriever = self.vectorstore.as_retriever(search_kwargs={"k": 5})
 
@@ -57,6 +58,7 @@ class FAISSEngine:
 
         index_path = f"{FAISS_DIR}/index.faiss"
 
+        # Reusing index
         if os.path.exists(index_path) and current_fp == stored_fp:
             print("Loading existing FAISS index...")
             vectorstore = FAISS.load_local(
@@ -72,5 +74,9 @@ class FAISSEngine:
 
         return vectorstore
 
+    # --------------------------------------------------------------------------------
+    # FAISS Search Entry Point
+    # Retrieving semantically similar documents using embeddings
+    # --------------------------------------------------------------------------------
     def search(self, query):
         return self.retriever.invoke(query)
