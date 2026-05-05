@@ -20,6 +20,7 @@ from services.grounding import (
 from services.query_classifier import QueryClassifier
 from services.disease_resolver import DiseaseResolver
 from services.response_formatter import ResponseFormatter
+from services.logger import RAGLogger
 from config import LLM_MODEL, TEMPLATE, OPENAI_API_KEY
 
 
@@ -43,17 +44,29 @@ class RAGService:
     def _format_docs(self, docs):
         # Flattening retrieved documents into a single context block
         return "\n\n".join(doc.page_content for doc in docs)
+    
+    def _is_direct_disease_query(self, query):
+        query_lower = query.lower()
+
+        for disease in self.resolver.diseases:
+            if disease.lower() in query_lower:
+                return True
+
+        return False
 
     # --------------------------------------------------------------------------------
     # Core Pipeline Execution
     # Applying retrieval filtering -> validation -> generation -> grounding
     # --------------------------------------------------------------------------------
-    def _run_pipeline(self, user_query, docs):
+    def _run_pipeline(self, user_query, docs, logger):
         # Narrowing context to dominant disease to avoid cross disease mixing
         docs = filter_to_dominant_disease(docs)
 
         # Stopping early if context is weak or inconsistent
-        if not is_valid_context(docs, user_query):
+        valid_ctx = is_valid_context(docs, user_query)
+        logger.log_guardrail(valid_ctx)
+
+        if not valid_ctx:
             return "[CTX_FAIL]"
 
         context = self._format_docs(docs)
@@ -68,6 +81,8 @@ class RAGService:
             "question": user_query
         })
 
+        logger.log_generation(response)
+
         # Validating response quality and safety
         if not is_valid_response(response):
             return "[RESP_FAIL]"
@@ -75,7 +90,10 @@ class RAGService:
         if has_external_links(response):
             return "[LINK_FAIL]"
 
-        if not is_grounded_response(response, docs, user_query):
+        grounded = is_grounded_response(response, docs, user_query)
+        logger.log_grounding(grounded)
+
+        if not grounded:
             return "[GROUND_FAIL]"
 
         if not is_valid_source(response, docs):
@@ -89,25 +107,45 @@ class RAGService:
     # Ensuring consistent execution path for both normal and evaluation flows
     # --------------------------------------------------------------------------------
     def _execute_query(self, user_query, docs=None):
+        logger = RAGLogger()
+        logger.start(user_query)
+
         if docs is None:
-            query_type = self.classifier.classify(user_query)
+            # Skipping classifier if disease clearly present
+            if self._is_direct_disease_query(user_query):
+                query_type = "KNOWN_DISEASE"
+            else:
+                query_type = self.classifier.classify(user_query)
+
+            logger.log_query_type(query_type)
 
             if query_type == "NON_MEDICAL":
+                logger.set_final_status("NON_MEDICAL")
+                logger.end()
                 return self.formatter.format("[NON_MEDICAL]")
 
-            # Handling queries with optional disease resolution
             if query_type == "AMBIGUOUS_MEDICAL":
                 disease = self.resolver.match(user_query)
+                logger.log_resolved_disease(disease)
 
                 if disease:
                     docs = self.retriever.search(disease)
                 else:
+                    logger.set_final_status("AMBIGUOUS_QUERY")
+                    logger.end()
                     return self.formatter.format("[AMBIGUOUS_QUERY]")
 
             else:
                 docs = self.retriever.search(user_query)
 
-        result = self._run_pipeline(user_query, docs)
+        # log retrieval
+        logger.log_retrieval(docs)
+
+        result = self._run_pipeline(user_query, docs, logger)
+
+        logger.set_final_status(result if result.startswith("[") else "SUCCESS")
+        logger.end()
+
         return self.formatter.format(result)
 
     def query(self, user_query):
