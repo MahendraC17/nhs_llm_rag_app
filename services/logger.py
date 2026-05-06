@@ -5,8 +5,11 @@
 
 import json
 import time
+import os
 from collections import Counter
 
+LOG_DIR = "logs"
+LOG_FILE = os.path.join(LOG_DIR, "rag_logs.jsonl")
 
 class RAGLogger:
     def __init__(self):
@@ -61,6 +64,14 @@ class RAGLogger:
         self.log["latency_ms"] = int((time.time() - self.start_time) * 1000)
 
         try:
+            os.makedirs(LOG_DIR, exist_ok=True)
+
+            # Appending one structured query per line
+            with open(LOG_FILE, "a", encoding="utf-8") as f:
+                f.write(json.dumps(self.log) + "\n")
+
+            # Keeping console visibility for local debugging
             print(json.dumps(self.log, indent=2))
+
         except Exception:
             pass
