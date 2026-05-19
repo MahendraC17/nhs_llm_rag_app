@@ -9,6 +9,19 @@ import os
 from services.rag_service import RAGService
 from config import DATA_DIR
 
+st.set_page_config(layout="wide")
+
+st.markdown("""
+<style>
+.stApp {
+    background-image: radial-gradient(circle, rgba(255,255,255,0.12) 1px, transparent 1px);
+    background-size: 18px 18px;
+    background-color: #0e1117;
+}
+</style>
+""", unsafe_allow_html=True)
+
+
 # os.environ["OPENAI_API_KEY"] = st.secrets["openai"]["api_key"]
 
 # Initializing RAG service for handling queries
