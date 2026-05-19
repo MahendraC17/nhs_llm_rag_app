@@ -9,7 +9,11 @@ import os
 from services.rag_service import RAGService
 from config import DATA_DIR
 
-st.set_page_config(layout="wide")
+
+st.set_page_config(
+    page_title="NHS Medical RAG Assistant",
+    layout="wide"
+)
 
 st.markdown("""
 <style>
@@ -18,14 +22,53 @@ st.markdown("""
     background-size: 18px 18px;
     background-color: #0e1117;
 }
+
+/* Main content spacing */
+.block-container {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    max-width: 1100px;
+}
+
+/* Hero title */
+.hero-title {
+    font-size: 3rem;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 0.5rem;
+}
+
+/* Hero subtitle */
+.hero-subtitle {
+    font-size: 1.1rem;
+    color: #b0b3b8;
+    line-height: 1.7;
+    margin-bottom: 2rem;
+}
+
+/* Response card */
+.response-card {
+    background-color: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 14px;
+    padding: 1.5rem;
+    margin-top: 1rem;
+}
+
+/* Disclaimer */
+.disclaimer {
+    color: #ffb3b3;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-top: 1rem;
+}
 </style>
 """, unsafe_allow_html=True)
 
 
-# os.environ["OPENAI_API_KEY"] = st.secrets["openai"]["api_key"]
-
 # Initializing RAG service for handling queries
 rag_service = RAGService()
+
 
 # --------------------------------------------------------------------------------
 # Fetching available disease conditions from data directory
@@ -38,59 +81,124 @@ def get_available_conditions(data_dir=DATA_DIR):
         if f.endswith(".pdf")
     )
 
-st.set_page_config(page_title="NHS Disease Information Chatbot", layout="centered")
-st.title("🔍 NHS Disease Information Chatbot")
-
-# --------------------------------------------------
-# Sidebar Available Conditions
-# --------------------------------------------------
 
 conditions = get_available_conditions()
 
-with st.sidebar:
-    st.header("Available Conditions")
-    st.metric("Total conditions", len(conditions))
 
-    st.markdown("**Covered diseases & conditions:**")
+# --------------------------------------------------------------------------------
+# Sidebar
+# Showing available dataset coverage and project limitations
+# --------------------------------------------------------------------------------
+with st.sidebar:
+    st.header("Dataset Coverage")
+
+    st.metric("Available Conditions", len(conditions))
+
+    st.markdown("### Included NHS Conditions")
+
     for condition in conditions:
         st.markdown(f"- {condition}")
 
+    st.divider()
+
+    st.markdown("### System Notes")
+
     st.caption(
-        "The application only includes some diseases & conditions because scraping them was done manually and was tedious, also "
-        "it serves purpose for testing and deploying with limitation of token strength for embeddings and responses."
+        """
+        This system answers questions strictly from retrieved NHS documents.
+
+        Some diseases or symptom combinations may not exist in the dataset.
+        In those cases, the system intentionally refuses instead of guessing.
+        """
     )
 
-# --------------------------------------------------
-# Main Query UI
-# --------------------------------------------------
 
-user_query = st.text_input("Enter your question:")
+# --------------------------------------------------------------------------------
+# Hero Section
+# Introducing system purpose and grounding behavior
+# --------------------------------------------------------------------------------
+st.markdown(
+    """
+    <div class="hero-title">
+        NHS Medical RAG Assistant
+    </div>
 
-# Handling query submission and triggering pipeline
-if st.button("Submit") and user_query:
-    with st.spinner("Fetching answer..."):
+    <div class="hero-subtitle">
+        Ask questions about NHS medical conditions, symptoms, treatments,
+        and self-care guidance using retrieved NHS documents.<br><br>
+
+        The system uses retrieval grounding, validation guardrails,
+        and refusal handling to reduce unsupported medical responses.
+    </div>
+    """,
+    unsafe_allow_html=True
+)
+
+
+# --------------------------------------------------------------------------------
+# Query Input Section
+# User query with examples and wider layout
+# --------------------------------------------------------------------------------
+st.markdown("### Ask a Question")
+
+user_query = st.text_input(
+    label="",
+    placeholder="Example: What are the symptoms of asthma?"
+)
+
+st.markdown(
+    """
+    **Example queries**
+    - Symptoms of autism
+    - What causes appendicitis?
+    - Treatment for iron deficiency anaemia
+    - My child can't focus and is very restless
+    """
+)
+
+
+# --------------------------------------------------------------------------------
+# Query Submission
+# Running retrieval and generation pipeline with loading state
+# --------------------------------------------------------------------------------
+if st.button("Submit Query", use_container_width=True) and user_query:
+
+    with st.spinner("Retrieving NHS context and validating response..."):
+
         try:
             response = rag_service.query(user_query)
 
             # Handling empty responses
             if not response or not response.strip():
-                st.warning(
-                    "I couldn’t find anything relevant to that in the NHS documents."
-                )
-            else:
-                st.subheader("Answer")
-                st.write(response)
 
-                st.markdown(
-                    """
-                    <span style='color: #ff4b4b; font-size: 0.9em;'>
-                    ⚠️ This response is for informational purposes only and is not a substitute
-                    for professional medical advice. Please consult a healthcare provider
-                    for personal medical concerns.
-                    </span>
-                    """,
-                    unsafe_allow_html=True
+                st.warning(
+                    "I couldn’t find enough reliable NHS information for this query."
                 )
+
+            else:
+                st.markdown("### Response")
+
+                with st.container():
+
+                    st.markdown(
+                        f"""
+                        <div class="response-card">
+                            {response}
+                        </div>
+                        """,
+                        unsafe_allow_html=True
+                    )
+
+                    st.markdown(
+                        """
+                        <div class="disclaimer">
+                            This response is for informational purposes only and
+                            should not replace professional medical advice,
+                            diagnosis, or treatment.
+                        </div>
+                        """,
+                        unsafe_allow_html=True
+                    )
 
         except Exception as e:
             st.error(f"Error: {str(e)}")
