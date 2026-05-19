@@ -46,15 +46,6 @@ st.markdown("""
     margin-bottom: 2rem;
 }
 
-/* Response card */
-.response-card {
-    background-color: rgba(255,255,255,0.03);
-    border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 14px;
-    padding: 1.5rem;
-    margin-top: 1rem;
-}
-
 /* Disclaimer */
 .disclaimer {
     color: #ffb3b3;
@@ -146,22 +137,16 @@ user_query = st.text_input(
     placeholder="Example: What are the symptoms of asthma?"
 )
 
-st.markdown(
-    """
-    **Example queries**
-    - Symptoms of autism
-    - What causes appendicitis?
-    - Treatment for iron deficiency anaemia
-    - My child can't focus and is very restless
-    """
-)
-
-
 # --------------------------------------------------------------------------------
 # Query Submission
 # Running retrieval and generation pipeline with loading state
 # --------------------------------------------------------------------------------
-if st.button("Submit Query", use_container_width=True) and user_query:
+col1, col2, col3 = st.columns([1, 1, 4])
+
+with col1:
+    submit = st.button("Submit Query")
+
+if submit and user_query:
 
     with st.spinner("Retrieving NHS context and validating response..."):
 
@@ -172,7 +157,7 @@ if st.button("Submit Query", use_container_width=True) and user_query:
             if not response or not response.strip():
 
                 st.warning(
-                    "I couldn’t find enough reliable NHS information for this query."
+                    "I couldn't find enough reliable NHS information for this query."
                 )
 
             else:
@@ -180,14 +165,8 @@ if st.button("Submit Query", use_container_width=True) and user_query:
 
                 with st.container():
 
-                    st.markdown(
-                        f"""
-                        <div class="response-card">
-                            {response}
-                        </div>
-                        """,
-                        unsafe_allow_html=True
-                    )
+                    with st.container(border=True):
+                        st.markdown(response)
 
                     st.markdown(
                         """
