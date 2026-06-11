@@ -8,62 +8,86 @@ import os
 
 from evaluation.evaluator import Evaluator
 
-
-# Running full evaluation pipeline
+# Run evaluation
 evaluator = Evaluator()
 evaluator.run()
 
 input_path = os.path.join("evaluation", "test_results.csv")
 
 total = 0
-disease_correct = 0
+normal_correct = 0
 refusal_correct = 0
-answer_count = 0
+ambiguous_correct = 0
+normal_total = 0
+refusal_total = 0
+ambiguous_total = 0
 
 failures = []
+
+def is_ambiguous_response(response):
+    response = response.lower()
+
+    return (
+        "not confident enough" in response
+        or "symptoms are too broad" in response
+        or "don't clearly match one condition" in response)
+
 
 with open(input_path, mode="r", encoding="utf-8") as file:
     reader = csv.DictReader(file)
 
     for row in reader:
         total += 1
-
-        expected = row["expected_disease"].lower().strip()
-        predicted = row["predicted_disease"].lower().strip()
+        query = row["query"]
         query_type = row["type"].strip()
+        response = row["response"]
         is_refusal = row["is_refusal"] == "True"
+        final_status = row["final_status"]
 
-        # Matching dominant disease from retrieval with expected label
-        if expected and predicted == expected:
-            disease_correct += 1
+        if query_type == "normal":
+            normal_total += 1
 
-        # Checking whether system behaved correctly (answered vs refused)
-        if query_type == "refusal" and is_refusal:
-            refusal_correct += 1
-        elif query_type == "normal" and not is_refusal:
-            refusal_correct += 1
+            if row["final_status"] == "SUCCESS":
+                normal_correct += 1
+            else:
+                failures.append(
+                    (query, final_status))
 
-        # Counting successful answers for valid queries
-        if query_type == "normal" and not is_refusal:
-            answer_count += 1
+        elif query_type == "refusal":
+            refusal_total += 1
+            final_status = row["final_status"]
 
-        # Tracking mismatches for manual inspection
-        if expected and predicted != expected:
-            failures.append((row["query"], predicted, expected))
+            if final_status == "NON_MEDICAL":
+                refusal_correct += 1
+            else:
+                failures.append(
+                    (query, "REFUSAL_QUERY_ANSWERED"))
 
+        elif query_type == "ambiguous":
+            ambiguous_total += 1
 
-print("\n--- EVALUATION ---\n")
+            if row["final_status"] == "AMBIGUOUS_QUERY":
+                ambiguous_correct += 1
+            else:
+                failures.append(
+                    (query, "AMBIGUOUS_QUERY_ANSWERED"))
+
+print("\n--- EVALUATION RUN ---\n")
 
 print(f"Total queries: {total}")
 
-if total > 0:
-    print(f"Disease Accuracy: {disease_correct / total:.2f}")
-    print(f"Refusal Accuracy: {refusal_correct / total:.2f}")
+if normal_total:
+    print(f"Normal Query Accuracy: "f"{normal_correct / normal_total:.2f}")
 
-normal_queries = sum(1 for _ in open(input_path)) - 1
-print(f"Answer Rate (normal queries): {answer_count}")
+if refusal_total:
+    print(f"Refusal Accuracy: "f"{refusal_correct / refusal_total:.2f}")
 
-print("\n--- Failures (Retrieval mismatch) ---")
-for f in failures:
-    print(f"Query: {f[0]}")
-    print(f"Predicted: {f[1]} | Expected: {f[2]}\n")
+if ambiguous_total:
+    print(f"Ambiguous Accuracy: "f"{ambiguous_correct / ambiguous_total:.2f}")
+
+print(f"Successful Answers: {normal_correct}")
+
+print("\n--- Failures ---")
+
+for query, reason in failures:
+    print(f"{reason}: {query}")

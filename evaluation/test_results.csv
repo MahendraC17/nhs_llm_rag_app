@@ -1,32 +1,42 @@
-query,expected_disease,type,response,response_length,is_refusal,predicted_disease
+query,expected_disease,type,response,response_length,is_refusal,query_type_actual,resolved_disease,final_status
 What are the symptoms of asthma?,asthma,normal,"- Wheezing
 - Coughing
 - Shortness of breath
 - Chest feeling tight
+- Symptoms can be mild or severe and usually come and go
+- Symptoms may be worse at night and early in the morning
+- An asthma attack involves severe symptoms and difficulty breathing, which can be life-threatening
 
-Source : Asthma",82,False,asthma
-How is angina treated?,angina,normal,"- Follow the instructions provided for chest pain: rest, use prescribed medicine (usually glyceryl trinitrate), and take another dose after 5 minutes if symptoms persist.
-- Call 999 for an ambulance if symptoms do not improve after the second dose.
-- Manage triggers by avoiding stress, cold temperatures, and large meals.
-- Always carry your angina medicine and use it as directed by your doctor.
-- Lifestyle changes such as quitting smoking, maintaining a healthy weight, and eating a balanced diet can help manage angina.
-- [Red Flag] Seek urgent medical attention if symptoms are not controlled or worsen.
-Source: Angina",624,False,angina
+Source: Asthma",296,False,KNOWN_DISEASE,,SUCCESS
+How is angina treated?,angina,normal,"- Follow the instructions provided for chest pain: stop activity, rest, and use prescribed medicine (usually glyceryl trinitrate/GTN).
+- Take another dose after 5 minutes if symptoms do not improve.
+- Call 999 for an ambulance if symptoms persist 5 minutes after the second dose.
+- To help manage angina, avoid triggers like stress, cold temperatures, or large meals.
+- Always carry your angina medicine and use it as instructed by your doctor.
+- Lifestyle changes such as quitting smoking, maintaining a healthy weight, and eating a balanced diet can help.
+- If symptoms are well controlled, angina usually does not significantly impact daily life, including exercise and sex.
+- Your doctor may discuss any necessary adjustments to work or driving based on your condition.
+
+Source: Angina",789,False,KNOWN_DISEASE,,SUCCESS
 Causes of appendicitis,appendicitis,normal,"- Appendicitis is caused by something getting stuck in the appendix, such as a small piece of undigested food or hard poo.
 - This leads to infection and swelling in the appendix.
-- Source: Appendicitis",201,False,appendicitis
+- It can happen at any age but is most common in children over 10 years old and young adults.
+- It is rare in babies under 12 months old.
+Source : Appendicitis",338,False,KNOWN_DISEASE,,SUCCESS
 Symptoms of arthritis,arthritis,normal,"- Joint pain, tenderness, and stiffness
 - Inflammation in and around the joints
 - Restricted movement of the joints
 - Warm red skin over the affected joint
 - Weakness and muscle wasting
 - In children with polyarticular JIA: feeling unwell and occasionally having a high temperature of 38°C or above
-- Symptoms of juvenile idiopathic arthritis (JIA) are similar to adult rheumatoid arthritis
-
-Source : Arthritis",410,False,arthritis
+- Symptoms similar to adult rheumatoid arthritis in children with polyarticular JIA
+Source : Arthritis",401,False,KNOWN_DISEASE,,SUCCESS
 What is atrial fibrillation?,atrial fibrillation,normal,"- Atrial fibrillation (afib or AF) is a type of heart rhythm problem where your heartbeat is not regular.
 - It is caused by a problem with the electrical system that makes your heart beat.
-- Source: Atrial fibrillation",218,False,atrial fibrillation
+- Symptoms can include an irregular heartbeat, pounding, racing, fluttering, skipping or missing a beat, a heartbeat faster than 100 beats per minute, feeling very tired, difficulty exercising, chest pain or tightness, and feeling short of breath, lightheaded, dizzy, or like you might faint.
+- Sometimes there are no symptoms, and it is found during routine check-ups or tests for other conditions.
+- If suspected, a GP will refer you to a heart specialist for further tests.
+Source: Atrial fibrillation",693,False,KNOWN_DISEASE,,SUCCESS
 Signs of ADHD in children,adhd in children and young people,normal,"- Being easily distracted
 - Finding it hard to listen to what people are saying or to follow instructions
 - Forgetting everyday tasks, like brushing their teeth or putting on socks
@@ -37,53 +47,54 @@ Signs of ADHD in children,adhd in children and young people,normal,"- Being easi
 - Finding it hard to wait their turn or interrupting conversations
 - Symptoms usually start before age 12 and involve difficulties with attention, hyperactivity, and impulsiveness
 
-Source : ADHD in children and young people",566,False,adhd in children and young people
+Source : ADHD in children and young people",566,False,KNOWN_DISEASE,,SUCCESS
 Treatment for iron deficiency anaemia,iron deficiency anaemia,normal,"- Once the cause of iron deficiency anaemia is identified, iron tablets are recommended to replace the missing iron.
 - You will need to take iron tablets for about 6 months.
 - Drinking orange juice after taking the tablets may help your body absorb the iron.
 - Follow your GP's advice on how to take the iron tablets.
-- Keep iron supplement tablets out of the reach of children, as overdose can be fatal in young children.
-- The underlying cause of the anaemia may also be treated or further checked by a specialist if needed.
-
-Source: Iron deficiency anaemia",559,False,iron deficiency anaemia
-What causes vitamin B12 deficiency anaemia?,vitamin b12 or folate deficiency anaemia,normal,"- Pernicious anaemia, an autoimmune condition affecting the stomach, is the most common cause of vitamin B12 deficiency in the UK.
-- Pernicious anaemia causes the immune system to attack stomach cells that produce intrinsic factor, leading to impaired absorption of vitamin B12.
-- A deficiency can also result from not getting enough vitamin B12 from the diet.
-- The body needs vitamin B12 combined with intrinsic factor to be absorbed properly in the gut.
-- Source : Vitamin B12 deficiency anaemia",498,False,vitamin b12 or folate deficiency anaemia
+- Keep iron supplement tablets out of reach of children, as overdose can be fatal in young children.
+- The GP may also advise dietary changes to include foods rich in iron if diet is partly causing the deficiency.
+Source : Iron deficiency anaemia",564,False,KNOWN_DISEASE,,SUCCESS
+What causes vitamin B12 deficiency anaemia?,vitamin b12 or folate deficiency anaemia,normal,"- Pernicious anaemia, an autoimmune condition that affects the stomach, is the most common cause of vitamin B12 deficiency in the UK.
+- It occurs when the immune system attacks the cells in the stomach that produce intrinsic factor, which is necessary for absorbing vitamin B12.
+- A lack of vitamin B12 can also result from not getting enough vitamin B12 from the diet.
+- The exact cause of pernicious anaemia is unknown, but it is more common in women around 60 years of age, people with a family history, and those with other autoimmune conditions.
+- [Red Flag] Symptoms requiring urgent medical attention include severe neurological symptoms or signs of anemia.
+Source : vitamin B12 deficiency anaemia",704,False,KNOWN_DISEASE,,SUCCESS
 Symptoms of acute pancreatitis,acute pancreatitis,normal,"- Sudden severe pain in the centre of your tummy (abdomen)
 - Feeling or being sick
 - A high temperature of 38°C or more (fever)
 
-Source: Acute pancreatitis",155,False,acute pancreatitis
+Source: Acute pancreatitis",155,False,KNOWN_DISEASE,,SUCCESS
 What is Addison's disease?,addison's disease,normal,"- Addison's disease is a rare disorder of the adrenal glands, also known as primary adrenal insufficiency or hypoadrenalism.
 - It occurs when the adrenal glands are damaged and do not produce enough cortisol or aldosterone.
 - The adrenal glands are small glands on top of the kidneys that produce essential hormones.
 - The most common cause is problems with the immune system.
 - It develops when the outer layer of the adrenal glands (adrenal cortex) is damaged, reducing hormone production.
 - With treatment, symptoms can be controlled, and most people can live an active life with few limitations.
-- Source : Addison's disease",628,False,addison's disease
-How is plantar fasciitis treated?,plantar fasciitis,normal,"- Usually, you can ease the pain yourself by:
-  - Resting and raising your foot on a stool
-  - Applying an ice pack or frozen peas in a towel on the painful area for up to 20 minutes every 2 to 3 hours
-  - Wearing shoes with cushioned heels and good arch support
-  - Using insoles or heel pads in your shoes
-  - Doing regular gentle exercises to stretch the sole of your foot and heel
-  - Trying exercises that do not put pressure on your feet, such as swimming
-  - Taking painkillers like paracetamol or ibuprofen (gel or tablets) if needed
-  - Trying to lose weight if overweight
-- If symptoms do not improve within 2 weeks, see a GP
+- Source : Addison's disease",628,False,KNOWN_DISEASE,,SUCCESS
+How is plantar fasciitis treated?,plantar fasciitis,normal,"- Rest and raise your foot on a stool when possible
+- Apply an ice pack or frozen peas in a towel to the painful area for up to 20 minutes every 2 to 3 hours
+- Wear shoes with cushioned heels and good arch support
+- Use insoles or heel pads in your shoes
+- Try gentle exercises to stretch the sole of your foot and heel
+- Engage in low-pressure activities like swimming
+- Take painkillers such as paracetamol or ibuprofen (gel or tablets) if needed
+- Try to lose weight if overweight
 
-Source : Plantar fasciitis",663,False,plantar fasciitis
+Self-care advice is recommended, and see a GP if symptoms do not improve within 2 weeks.
+
+Source : Plantar fasciitis",601,False,KNOWN_DISEASE,,SUCCESS
 What is albinism?,albinism,normal,"- Albinism affects the production of melanin, the pigment that colours skin, hair, and eyes.
 - It is a lifelong condition that does not get worse over time.
 - People with albinism have a reduced amount of melanin or none at all, which can affect their colouring and eyesight.
-- There are two main types: oculocutaneous albinism (OCA) affecting skin, hair, and eyes, and ocular albinism (OA) mainly affecting the eyes.
-- It is usually inherited in an autosomal recessive pattern.
-- Symptoms include very pale skin that burns easily in the sun and does not usually tan.
+- It is usually obvious from a baby's appearance at birth, including hair, skin, and eye colour.
+- There are two main types: oculocutaneous albinism (affecting skin, hair, and eyes) and ocular albinism (mainly affecting the eyes).
+- Albinism is inherited in an autosomal recessive pattern.
+- People with albinism often have very pale skin that burns easily in the sun and does not usually tan.
 - The reduced melanin can cause eye problems due to its role in retina development.
-- Diagnosis is usually obvious from a baby's appearance at birth.
-Source : Albinism",735,False,albinism
+
+Source : Albinism",772,False,KNOWN_DISEASE,,SUCCESS
 Symptoms of autism,autism,normal,"- Not responding to their name
 - Avoiding eye contact
 - Not smiling when you smile at them
@@ -94,13 +105,14 @@ Symptoms of autism,autism,normal,"- Not responding to their name
 - Repeating the same phrases
 - In older children: not understanding what others are thinking or feeling
 - Unusual speech, such as repeating phrases and talking ‘at’ others
-- Liking a strict daily routine and getting upset if it changes
+- Liking a strict daily routine and getting very upset if it changes
 - Having a very keen interest in certain subjects or activities
+- Getting very upset if asked to do something
 - Finding it hard to make friends or preferring to be alone
 - Taking things very literally
 - Finding it hard to say how they feel
 
-Source : Autism",760,False,autism
+Source : Autism",811,False,KNOWN_DISEASE,,SUCCESS
 Treatment for chemical burns,acid and chemical burns,normal,"- Call 999 for medical help.
 - Wear gloves to protect yourself from the chemical.
 - Carefully remove any clothing with the chemical on it.
@@ -108,62 +120,394 @@ Treatment for chemical burns,acid and chemical burns,normal,"- Call 999 for medi
 - Put the affected area under cool or lukewarm running water or pour lots of water over it for about 1 hour.
 - Seek medical advice as soon as possible.
 - You may need painkillers to ease pain and fluids, usually given through a vein.
-- For severe burns, treatment may include surgery to help wounds heal and reconstructive surgery if the burn affects movement or appearance.
-- Do not put anything on the burn, such as skin creams or other chemicals.
-
-Source : Acid and chemical burns",668,False,acid and chemical burns
-What is the capital of Germany?,,refusal,I don’t have enough relevant information to answer this safely.,63,False,vitamin b12 or folate deficiency anaemia
-How do I invest money?,,refusal,I don’t have enough relevant information to answer this safely.,63,False,autism
-Tell me a joke,,refusal,I don’t have enough relevant information to answer this safely.,63,False,autism
-Best phone to buy in 2025,,refusal,I don’t have enough relevant information to answer this safely.,63,False,addison's disease
-Why is the sky blue?,,refusal,I don’t have enough relevant information to answer this safely.,63,False,albinism
-pain in heel when I wake up,plantar fasciitis,normal,"- The pain is much worse when you first start walking after sleeping or resting.
-- This is a common symptom of plantar fasciitis.
-- You can try resting, raising your foot, applying an ice pack, wearing supportive shoes, and doing gentle stretching exercises.
-- If the pain does not improve within 2 weeks or worsens, see a GP.
-Source : Plantar fasciitis",353,False,plantar fasciitis
+- For severe burns, treatment may include surgery to help wounds heal and reconstructive surgery if movement or appearance is affected.
+Source : Acid and chemical burns",587,False,KNOWN_DISEASE,,SUCCESS
+What is the capital of Germany?,,refusal,This system is designed to answer NHS medical-related questions only.,69,False,NON_MEDICAL,,NON_MEDICAL
+How do I invest money?,,refusal,This system is designed to answer NHS medical-related questions only.,69,False,NON_MEDICAL,,NON_MEDICAL
+Tell me a joke,,refusal,This system is designed to answer NHS medical-related questions only.,69,False,NON_MEDICAL,,NON_MEDICAL
+Best phone to buy in 2025,,refusal,This system is designed to answer NHS medical-related questions only.,69,False,NON_MEDICAL,,NON_MEDICAL
+Why is the sky blue?,,refusal,This system is designed to answer NHS medical-related questions only.,69,False,NON_MEDICAL,,NON_MEDICAL
+pain in heel when I wake up,plantar fasciitis,normal,"- The main symptom of plantar fasciitis is pain on the bottom of your foot, around your heel and arch.
+- It is more likely to be plantar fasciitis if the pain is much worse when you first start walking after sleeping or resting.
+- The pain gradually gets better when you start moving around, but gets worse if you stand, walk, or run for a long time.
+- Try resting and raising your foot, applying an ice pack for up to 20 minutes every 2 to 3 hours, and wearing shoes with cushioned heels and good arch support.
+- Gentle stretching exercises for the sole of your foot and heel may help.
+- If the pain persists, see a GP for further advice.
+Source : (Plantar fasciitis)",668,False,AMBIGUOUS_MEDICAL,Plantar fasciitis,SUCCESS
 irregular heartbeat and dizziness,atrial fibrillation,normal,"- An irregular heartbeat, where your pulse is not steady, can be a symptom of atrial fibrillation.
-- Dizziness may occur alongside an irregular heartbeat.
-- Other symptoms to watch for include feeling very tired, difficulty exercising, chest pain or tightness, shortness of breath, lightheadedness, or feeling like you might faint.
-- If you experience chest pain, shortness of breath, sweating, feeling or being sick, fainting, dizziness, or falling over, seek urgent medical attention by calling 999. Do not drive yourself to A&E.
-- Source : Atrial fibrillation",562,False,atrial fibrillation
+- Dizziness may occur along with an irregular heartbeat.
+- If you experience symptoms like chest pain, shortness of breath, sweating, feeling or being sick, fainting, feeling dizzy, or falling over, you should seek urgent medical attention and call 999.
+- Do not drive yourself to A&E if these severe symptoms are present.
+- Source : Atrial fibrillation",452,False,KNOWN_DISEASE,,SUCCESS
 joint stiffness in the morning,arthritis,normal,"- Joint stiffness in the morning is a common symptom of arthritis.
-- It can occur due to inflammation and the effects of conditions like osteoarthritis or rheumatoid arthritis.
-- In osteoarthritis, stiffness results from the roughening and thinning of cartilage, making movement difficult.
-- In rheumatoid arthritis, stiffness is often associated with inflammation in and around the joints.
-- Managing joint stiffness includes avoiding long periods of sitting, taking regular breaks, and using joint protection techniques.
-- Source : Arthritis",543,False,arthritis
-yellowing of skin and tiredness,,refusal,"- The provided context does not mention yellowing of the skin (jaundice).
-- Tiredness or fatigue is a common symptom.
-- Additional symptoms to watch for include muscle weakness, low mood, loss of appetite, increased thirst, dizziness, darkened skin or lips, craving salty foods, feeling and being sick, abdominal pain, and dark patches of skin.
-- If yellowing of the skin occurs, it may indicate a different or more serious condition requiring medical attention.
-- Source : (Disease related to symptoms of fatigue and darkened skin)",532,False,addison's disease
-chest pain and shortness of breath,angina,normal,"- Chest pain and shortness of breath can be symptoms of angina.
-- Angina pain may feel like tightness, squeezing, pressure, or a dull ache.
-- These symptoms are often triggered by exercise, stress, emotion, or cold temperatures.
-- If the chest pain does not stop after resting or taking angina medicine, or if it is severe and accompanied by sweating, nausea, dizziness, or feeling short of breath, seek urgent medical help by calling 999.
-- [Red Flag] Call 999 if chest pain does not stop after resting or medication, or if it spreads to other areas and is associated with sweating, feeling sick, or dizziness.
-Source : Angina",627,False,angina
-fatigue and pale skin,addison's disease,normal,"- Fatigue and pale skin are symptoms associated with Addison's disease.
-- Other symptoms may include muscle weakness, low mood, loss of appetite, increased thirst, dizziness, and darkened skin or lips.
-- Severe dehydration, cold clammy skin, and low blood pressure can also occur in advanced cases.
-- A synacthen stimulation test may be used to confirm the diagnosis if cortisol levels are low.
-Source : Addison's disease",421,False,addison's disease
-my child can't focus and is very restless,adhd in children and young people,normal,"- Your child may be showing symptoms of ADHD, such as being easily distracted, feeling restless, or having high energy levels.
-- Supportive actions include making time for physical activities they enjoy, as exercise can help manage their energy.
-- Encourage your child to get regular sleep.
-- If you are concerned about these symptoms, consider talking to a healthcare professional or a specialist for further advice.
-- [Red Flag] If your child's restlessness is severe or associated with other concerning symptoms, seek urgent medical attention.
-Source : ADHD in children and young people",589,False,adhd in children and young people
+- It is often associated with inflammation in and around the joints.
+- Accurate diagnosis is important to determine the specific type of arthritis.
+- No specific self-care advice is provided in the context for morning stiffness.
+- [Red Flag] If accompanied by severe pain, swelling, or inability to move the joint, seek urgent medical attention.
+Source : Arthritis",431,False,AMBIGUOUS_MEDICAL,Arthritis,SUCCESS
+yellowing of skin and tiredness,,refusal,"I'm not confident enough to map your symptoms to a specific condition from the available NHS data.
+
+Try asking with more detail or mention a specific condition if you have one in mind.",184,True,AMBIGUOUS_MEDICAL,,AMBIGUOUS_QUERY
+chest pain and shortness of breath,angina,normal,"- Chest pain is a main symptom of angina, which can feel like tightness, squeezing, pressure, or a dull ache.
+- Shortness of breath may also occur with angina.
+- Angina attacks are often triggered by exercise, stress, emotion, or cold temperatures, and usually last less than 10 minutes.
+- Resting or taking angina medicine typically relieves the symptoms.
+- [Red Flag] If chest pain and shortness of breath are severe, persistent, or accompanied by other symptoms like dizziness or sweating, seek urgent medical attention.
+Source: Angina",538,False,AMBIGUOUS_MEDICAL,Angina,SUCCESS
+fatigue and pale skin,addison's disease,normal,"I'm not confident enough to map your symptoms to a specific condition from the available NHS data.
+
+Try asking with more detail or mention a specific condition if you have one in mind.",184,True,AMBIGUOUS_MEDICAL,,AMBIGUOUS_QUERY
+my child can't focus and is very restless,adhd in children and young people,normal,"- Your child may be experiencing symptoms of ADHD, which can include difficulty concentrating and feeling restless.
+- Children with ADHD may have trouble with attention, be easily distracted, and feel restless or get up and move around when they should sit still.
+- If you are concerned about these symptoms, help and support are available right now.
+- Find out about mental health support for children and young people for further assistance.
+- [Red Flag] If your child's symptoms are severe or worsening, seek urgent medical attention.
+Source : ADHD in children and young people",580,False,AMBIGUOUS_MEDICAL,ADHD in children and young people,SUCCESS
 burn from acid on skin what to do,acid and chemical burns,normal,"- Call 999 for medical help.
-- Wear gloves to protect yourself from the chemical if possible.
+- Wear gloves to protect yourself if helping someone else.
 - Carefully remove any clothing with the chemical on it.
+- Gently brush off any dry chemicals from the skin.
+- Rinse the affected area with cool or lukewarm running water or pour lots of water over it for about 1 hour.
+- You may need painkillers to ease pain and fluids, usually given through a vein.
+- [Red Flag] Seek urgent medical attention if the burn is severe or affects movement or physical appearance.
+Source : Acid and chemical burns",530,False,KNOWN_DISEASE,,SUCCESS
+how to lose weight,,refusal,This system is designed to answer NHS medical-related questions only.,69,False,NON_MEDICAL,,NON_MEDICAL
+how to sleep better,,refusal,This system is designed to answer NHS medical-related questions only.,69,False,NON_MEDICAL,,NON_MEDICAL
+What causes asthma?,asthma,normal,"- The exact cause of asthma is not fully understood.
+- It can be triggered by various factors such as allergies, exercise, smoke, cold air, or infections.
+- Factors that may increase the likelihood of developing asthma include having allergies (eczema, hay fever, food allergies), family history of asthma or allergies, premature birth or low birth weight, exposure to high levels of air pollution or cigarette smoke as a child, childhood illnesses affecting breathing (e.g., bronchiolitis, croup), and being overweight.
+- Breathing in certain chemicals at work can also cause asthma.
+Source : Asthma",600,False,KNOWN_DISEASE,,SUCCESS
+Can asthma get worse at night?,asthma,normal,"- Yes, asthma symptoms can be worse at night and early in the morning.
+- Symptoms include wheezing, coughing, shortness of breath, and chest tightness.
+- An asthma attack, which can be life-threatening, may occur if symptoms become severe.
+- Managing asthma with appropriate treatment can help reduce the risk of worsening symptoms at night.
+Source : Asthma",357,False,KNOWN_DISEASE,,SUCCESS
+How is appendicitis diagnosed?,appendicitis,normal,"- A GP or hospital doctor will feel your abdomen to check for pain and swelling.
+- Tests may include blood tests, urine tests, and scans such as ultrasound or CT scan to check for swelling in the appendix.
+- A pregnancy test may be done if there's a chance you could be pregnant.
+- There is no single test that can always confirm appendicitis, as symptoms can be similar to other conditions.
+- Diagnosis can be challenging due to symptom overlap with other conditions.
+
+Source : Appendicitis",491,False,KNOWN_DISEASE,,SUCCESS
+What are the complications of appendicitis?,appendicitis,normal,"- The wound becoming infected
+- Bleeding
+- Scar tissue forming (adhesions), which can cause a bowel blockage in rare cases
+- An abscess forming where your appendix was removed
+- Appendicitis coming back in the small part of your appendix that was not removed (stump appendicitis)
+- An infection of the inner lining of your abdomen (peritonitis)
+- A life-threatening reaction to infection (sepsis)
+- A painful build-up of pus (abscess)
+- A blockage in your bowel
+- Problems in pregnancy
+
+These complications require urgent treatment with surgery and antibiotics.  
+[Red Flag] - If complications occur, they can be serious and need immediate medical attention.  
+Source : Appendicitis",682,False,KNOWN_DISEASE,,SUCCESS
+Can arthritis affect daily activities?,arthritis,normal,"- Yes, living with arthritis can make carrying out simple, everyday tasks painful and difficult.
+- Occupational therapy can help if arthritis affects your ability to move around your home and perform daily tasks.
+- Self-care advice includes engaging in appropriate exercise, maintaining a healthy diet, and using recommended equipment to live independently.
+- [Red Flag] Symptoms requiring urgent medical attention are not specified in this context.
+- Source : Arthritis",470,False,KNOWN_DISEASE,,SUCCESS
+What treatments help arthritis?,arthritis,normal,"- Treatments for arthritis include lifestyle changes, medicines, physiotherapy, and surgery.
+- These treatments aim to improve movement and joint mobility, increase muscle strength, reduce stiffness, and boost energy.
+- Regular exercise combined with a healthy, balanced diet can help manage arthritis and reduce strain on joints.
+- Early diagnosis and treatment can help many people return to work and manage the condition effectively.
+- For severe arthritis affecting daily activities, an occupational therapist can provide advice and equipment to help live independently.
+- If you are overweight, losing weight can help cope with arthritis.
+Source : Arthritis",662,False,KNOWN_DISEASE,,SUCCESS
+How serious is atrial fibrillation?,atrial fibrillation,normal,"- Atrial fibrillation can lead to serious complications such as blood clots, stroke, and heart failure if not managed properly.
+- There is currently no cure, but treatment helps manage symptoms and reduce risks.
+- [Red Flag] Seek urgent medical attention if experiencing symptoms like severe chest pain, sudden weakness, or difficulty speaking.
+- Support and management are important for living with the condition.
+Source : Atrial fibrillation",443,False,KNOWN_DISEASE,,SUCCESS
+What symptoms can atrial fibrillation cause?,atrial fibrillation,normal,"- Irregular heartbeat, where your pulse is not steady
+- Sudden feeling like your heart is pounding, racing, fluttering, skipping or missing a beat
+- Heartbeat faster than 100 beats per minute
+- Feeling very tired
+- Finding it harder to exercise
+- Chest pain or tightness
+- Feeling short of breath, lightheaded, dizzy or like you might faint
+
+Source : Atrial fibrillation",370,False,KNOWN_DISEASE,,SUCCESS
+How does ADHD affect children?,adhd in children and young people,normal,"- Children with ADHD may have trouble concentrating, being easily distracted, and following instructions.
+- They may forget everyday tasks like brushing teeth or putting on socks.
+- Symptoms include high energy levels, fidgeting, tapping hands and feet, talking noisily, feeling restless, and needing to move around.
+- They might find it hard to wait their turn or may interrupt conversations.
+- ADHD can affect their ability to sit still and focus on tasks.
+- It is recognized that symptoms can include both inattentive and hyperactive behaviors.
+- [Red Flag] If symptoms are severe or concerning, consult a healthcare professional for assessment and support.
+Source : ADHD in children and young people",703,False,KNOWN_DISEASE,,SUCCESS
+Can ADHD impact school performance?,adhd in children and young people,normal,"- Yes, children and young people with ADHD may have trouble with concentrating, which can impact their school performance.
+- If support at home and at school is not helping, you may consider asking for an ADHD assessment.
+- Continue to get support at home and in school while waiting for a referral or assessment.
+- Speak to a GP or SENCO for advice and support options.
+Source : ADHD and mental health",402,False,KNOWN_DISEASE,,SUCCESS
+What are the signs of iron deficiency anaemia?,iron deficiency anaemia,normal,"- Tiredness and lack of energy
+- Shortness of breath
+- Noticeable heartbeats (heart palpitations)
+- Paler than usual skin
+- Headaches
+
+Less common symptoms include:
+- Hearing ringing, buzzing or hissing noises inside your head (tinnitus)
+- Food tasting strange
+- Feeling itchy
+- A sore tongue
+- Hair loss
+- Wanting to eat non-food items, such as paper or ice (pica)
+- Finding it hard to swallow (dysphagia)
+- Painful open sores (ulcers) in the corners of your mouth
+- Nail changes, such as spoon-shaped nails
+- Restless legs syndrome
+
+Source : Iron deficiency anaemia",567,False,KNOWN_DISEASE,,SUCCESS
+How is iron deficiency anaemia diagnosed?,iron deficiency anaemia,normal,"- The GP will ask about your lifestyle and medical history.
+- A blood test called a full blood count (FBC) is usually done to check if your red blood cell count is normal and to examine other blood cells.
+- No special preparation is needed for the test.
+- The GP may refer you to a specialist for further checks if necessary.
+Source : Iron deficiency anaemia",358,False,KNOWN_DISEASE,,SUCCESS
+What causes acute pancreatitis?,acute pancreatitis,normal,"- Usually caused by gallstones that block the opening of the pancreas.
+- Sometimes caused by drinking too much alcohol.
+- No other causes are specified in the provided context.
+- Reducing alcohol intake and altering diet can help prevent it.
+- [Red Flag] Severe cases may require urgent medical attention.
+Source : Acute pancreatitis",333,False,KNOWN_DISEASE,,SUCCESS
+How long does acute pancreatitis last?,acute pancreatitis,normal,"- Most people with acute pancreatitis start to feel better within about a week.
+- People with mild acute pancreatitis usually recover within 48 hours.
+- Recovery can take longer in severe cases, especially if complications develop.
+- Many are well enough to leave hospital after a few days.
+Source : Acute pancreatitis",318,False,KNOWN_DISEASE,,SUCCESS
+Can Addison's disease cause fatigue?,addison's disease,normal,"- Many people with Addison's disease find they must learn to manage bouts of fatigue.
+- Managing fatigue is an important part of living with the condition.
+- [Red Flag] If fatigue is severe or associated with other symptoms, seek medical attention.
+- Source: Addison's disease",276,False,KNOWN_DISEASE,,SUCCESS
+What treatments are available for Addison's disease?,addison's disease,normal,"- Treatment involves corticosteroid (steroid) replacement therapy for life.
+- The corticosteroid medicine is used to replace the hormones cortisol and aldosterone that the body no longer produces.
+- It is usually taken in tablet form 2 or 3 times a day.
+- During an adrenal crisis, treatment may include steroid injections and fluids containing salt and glucose.
+- Most people with Addison's disease can control symptoms with treatment and live an active life.
+
+Source : Addison's disease",488,False,KNOWN_DISEASE,,SUCCESS
+What causes plantar fasciitis?,plantar fasciitis,normal,"- Plantar fasciitis is caused by straining the part of your foot that connects your heel bone to your toes (plantar fascia).
+- It is not always clear why this happens.
+- Source : Plantar fasciitis",196,False,KNOWN_DISEASE,,SUCCESS
+How long does plantar fasciitis take to heal?,plantar fasciitis,normal,"I found some related information, but I'm not confident the answer would be fully supported by the NHS data.
+
+To avoid giving misleading information, I'm not providing an answer.",178,False,KNOWN_DISEASE,,SUCCESS
+Can albinism affect eyesight?,albinism,normal,"- Yes, albinism can affect eyesight, causing problems such as poor vision (short-sightedness, long-sightedness, or low vision), astigmatism, photophobia, and nystagmus.
+- These eye problems can be managed with treatments like glasses and contact lenses to improve vision.
+- Regular eye tests are necessary as a child with albinism gets older.
+- Some children may appear clumsy due to eyesight problems, but this usually improves with age.
+- Your baby may be referred to an eye specialist for tests, including electrodiagnostic testing.
+Source : Albinism",553,False,KNOWN_DISEASE,,SUCCESS
+What causes albinism?,albinism,normal,"- Albinism is caused by a genetic mutation that affects the production of melanin, the pigment responsible for colouring skin, hair, and eyes.
+- It involves inheriting specific genes from parents, either in an autosomal recessive pattern or X-linked inheritance.
+- The condition results from having a reduced amount of melanin or none at all, affecting pigmentation and eyesight.
+- Source : Albinism",399,False,KNOWN_DISEASE,,SUCCESS
+How does autism affect communication?,autism,normal,"- Autistic people may find it hard to communicate and interact with other people.
+- They may find it hard to understand how others think or feel.
+- They might have unusual speech, such as repeating phrases or talking ‘at’ others.
+- They may find it hard to say how they feel.
+- They may take things very literally, not understanding phrases like ""break a leg.""
+- [Red Flag] If there are significant difficulties in communication, seeking professional advice is recommended.
+Source : Autism",489,False,KNOWN_DISEASE,,SUCCESS
+Can autism affect social interaction?,autism,normal,"- Yes, autistic people may find it hard to communicate and interact with other people.
+- They may also find it difficult to understand how other people think or feel.
+- Autism can affect social interaction and communication skills.
+Source : Autism",247,False,KNOWN_DISEASE,,SUCCESS
+How should chemical burns be treated?,acid and chemical burns,normal,"- Call 999 for medical help.
+- Wear gloves to protect yourself when helping.
+- Carefully remove any clothing with chemical on it.
 - Carefully brush dry chemicals off the skin.
-- Rinse the affected area under cool or lukewarm running water or pour lots of water over it for about 1 hour.
+- Rinse the affected area with cool or lukewarm running water or pour lots of water over it for about 1 hour.
+- You may need painkillers to ease pain and fluids, usually given through a vein.
+- For severe burns, surgery or reconstructive surgery may be necessary.
 - Do not put anything on the burn, such as skin creams or other chemicals.
-- Get medical advice as soon as possible.
-- You may need painkillers and fluids, usually given through a vein.
-- If severe, you may require surgery or reconstructive surgery.
-Source : Acid and chemical burns",590,False,acid and chemical burns
-how to lose weight,,refusal,The available information is insufficient to confidently answer this question.,78,False,arthritis
-how to sleep better,,refusal,I’m not confident enough in the available information to give a reliable answer.,80,True,atrial fibrillation
+Source : Acid and chemical burns",547,False,KNOWN_DISEASE,,SUCCESS
+When should I seek help for chemical burns?,acid and chemical burns,normal,"- Get medical advice as soon as possible if you think you have an acid or chemical burn.
+- Call 999 for medical help immediately.
+- Seek urgent medical attention if the burn is severe or affects your movement or physical appearance.
+- Do not put anything on the burn, such as skin creams or other chemicals.
+Source : Acid and chemical burns",340,False,KNOWN_DISEASE,,SUCCESS
+What are the symptoms of angina?,angina,normal,"- Sudden pain in your chest, neck, shoulders, jaw or arms
+- The pain may feel like tightness, squeezing or pressure, or like a dull ache
+- May make you feel sick, breathless, dizzy or sweaty
+- Attacks usually last less than 10 minutes and stop after resting or taking angina medicine
+
+Source : Angina",300,False,KNOWN_DISEASE,,SUCCESS
+wheezing and shortness of breath,asthma,normal,"- Wheezing and shortness of breath are common symptoms of asthma, which occur when your airways become swollen and narrower.
+- These symptoms can be triggered by allergies, exercise, smoke, cold air, or infections.
+- Managing asthma with the right treatment reduces the risk of severe symptoms.
+- [Red Flag] Seek urgent medical attention if symptoms are severe or worsening.
+- Self-care includes avoiding triggers and following your prescribed asthma management plan.
+Source: Asthma",482,False,AMBIGUOUS_MEDICAL,Asthma,SUCCESS
+difficulty breathing during exercise,asthma,normal,"- Difficulty breathing during exercise can be a symptom of asthma, which occurs when your airways become swollen and narrower.
+- Exercise is a common trigger for asthma symptoms.
+- Managing asthma with appropriate treatment can help reduce breathing difficulties during physical activity.
+- Always inform your doctor or midwife if you have asthma, especially during pregnancy.
+- [Red Flag] If you experience severe difficulty breathing, seek urgent medical attention.
+- Self-care advice includes avoiding known triggers like smoke, cold air, and infections.
+Source : Asthma",573,False,AMBIGUOUS_MEDICAL,Asthma,SUCCESS
+coughing at night and chest tightness,asthma,normal,"- Coughing at night and chest tightness are common symptoms of asthma.
+- These symptoms occur when your airways become swollen and narrower, causing breathing problems.
+- Symptoms can be triggered by factors such as allergies, exercise, smoke, cold air, or infections.
+- Managing asthma with appropriate treatment can help reduce these symptoms.
+- [Red Flag] If symptoms are severe or worsening, seek urgent medical attention.
+- Self-care advice includes avoiding known triggers and following your prescribed asthma management plan.
+Source : Asthma",548,False,AMBIGUOUS_MEDICAL,Asthma,SUCCESS
+pain in the lower right side of my stomach,appendicitis,normal,"- Pain in the lower right side of your abdomen may be a symptom of appendicitis.
+- Appendicitis involves swelling and infection of the appendix.
+- It usually causes pain in that area and may require urgent treatment in hospital.
+- Get medical help if you're worried or if the pain is severe.
+- [Red Flag] Seek urgent medical attention if you experience symptoms of a burst appendix or other severe symptoms.
+Source : Appendicitis",429,False,AMBIGUOUS_MEDICAL,Appendicitis,SUCCESS
+sudden abdominal pain with nausea,appendicitis,normal,"I'm not confident enough to map your symptoms to a specific condition from the available NHS data.
+
+Try asking with more detail or mention a specific condition if you have one in mind.",184,True,AMBIGUOUS_MEDICAL,,AMBIGUOUS_QUERY
+stomach pain getting worse when moving,appendicitis,normal,"I'm not confident enough to map your symptoms to a specific condition from the available NHS data.
+
+Try asking with more detail or mention a specific condition if you have one in mind.",184,True,AMBIGUOUS_MEDICAL,,AMBIGUOUS_QUERY
+joint stiffness after waking up,arthritis,normal,"- Joint stiffness after waking up is a common symptom of arthritis.
+- It is often associated with inflammation in and around the joints.
+- The stiffness may be accompanied by joint pain, tenderness, and restricted movement.
+- If the stiffness persists or is severe, it is important to seek an accurate diagnosis.
+- Source: Arthritis",332,False,AMBIGUOUS_MEDICAL,Arthritis,SUCCESS
+painful swollen joints,arthritis,normal,"- Painful, swollen joints are a common symptom of arthritis.
+- This includes inflammation in and around the joints, joint tenderness, and stiffness.
+- The affected joint may also be warm and red.
+- If you experience these symptoms, it is important to seek an accurate diagnosis.
+- Self-care advice is not specified in the provided context.
+- [Red Flag] Seek urgent medical attention if there is severe pain, swelling, or other concerning symptoms.
+Source : Arthritis",466,False,AMBIGUOUS_MEDICAL,Arthritis,SUCCESS
+difficulty moving fingers because of joint pain,arthritis,normal,"- Difficulty moving fingers due to joint pain can be a symptom of arthritis.
+- Arthritis causes joint pain, tenderness, stiffness, inflammation, and restricted movement.
+- If the joint is warm, red, or swollen, it may indicate inflammation.
+- Accurate diagnosis is important to determine the type of arthritis and appropriate treatment.
+- Self-care advice is not specified in the provided context.
+- [Red Flag] If there is severe pain, swelling, or inability to move the joint, seek urgent medical attention.
+Source : Arthritis",527,False,AMBIGUOUS_MEDICAL,Arthritis,SUCCESS
+heart racing and irregular heartbeat,atrial fibrillation,normal,"- Heart racing and irregular heartbeat are symptoms of atrial fibrillation.
+- Symptoms may include a heartbeat that is not steady, pounding, racing, fluttering, or skipping a beat.
+- Other symptoms can include feeling very tired, difficulty exercising, chest pain or tightness, shortness of breath, lightheadedness, dizziness, or feeling like you might faint.
+- Some people may have no symptoms, and atrial fibrillation is found during routine check-ups or tests.
+- If symptoms start and stop on their own or worsen, or if treatment is not helping, seek medical advice.
+- [Red Flag] Call 999 if you experience chest pain, shortness of breath, sweating, feeling or being sick, fainting, dizziness, severe headache, weakness or numbness on one side, blurred vision, confusion, or difficulty speaking.
+- Tests may include ECG, echocardiogram, chest X-ray, and blood tests.
+- Treatment may involve medicines to control heart rate and rhythm, or blood thinners to reduce stroke risk.
+Source : Atrial fibrillation",1007,False,KNOWN_DISEASE,,SUCCESS
+fluttering feeling in chest,atrial fibrillation,normal,"- A fluttering feeling in the chest can be a symptom of atrial fibrillation.
+- Atrial fibrillation is a heart rhythm problem caused by a problem with the electrical system that makes your heart beat.
+- If you experience this symptom, it is important to seek medical advice for proper diagnosis and management.
+- Source: Atrial fibrillation",339,False,AMBIGUOUS_MEDICAL,Atrial fibrillation,SUCCESS
+episodes of rapid heartbeat and tiredness,atrial fibrillation,normal,"- Episodes of rapid heartbeat and tiredness can be symptoms associated with atrial fibrillation.
+- Regular check-ups are important to manage the condition.
+- Support from local or online groups may be helpful.
+- [Red Flag] Seek urgent medical attention if symptoms are severe or sudden.
+- Source: Atrial fibrillation",316,False,AMBIGUOUS_MEDICAL,Atrial fibrillation,SUCCESS
+child easily distracted and impulsive,adhd in children and young people,normal,"- The child may have symptoms of ADHD, which include being easily distracted and impulsive.
+- Children with ADHD often find it hard to concentrate, follow instructions, and may interrupt conversations.
+- They may also have high energy levels and difficulty waiting their turn.
+- If concerned, support and help are available, and the child does not have to struggle alone.
+- [Red Flag] If the symptoms are severe or affecting daily life, seek professional advice.
+Source : ADHD in children and young people",505,False,AMBIGUOUS_MEDICAL,ADHD in children and young people,SUCCESS
+child struggles to sit still in class,adhd in children and young people,normal,"- The child may have symptoms of ADHD, such as feeling restless, getting up and moving around when they’re supposed to sit still.
+- Children with ADHD often have high energy levels and may fidget or tap their hands and feet.
+- Support and help are available if you are concerned about the child's behavior.
+- Find out about mental health support for children and young people for further assistance.
+- [Red Flag] If the child's difficulty sitting still is severe or associated with other concerning symptoms, seek urgent medical advice.
+Source : ADHD in children and young people",579,False,AMBIGUOUS_MEDICAL,ADHD in children and young people,SUCCESS
+child constantly interrupting others,adhd in children and young people,normal,"I'm not confident enough to map your symptoms to a specific condition from the available NHS data.
+
+Try asking with more detail or mention a specific condition if you have one in mind.",184,True,AMBIGUOUS_MEDICAL,,AMBIGUOUS_QUERY
+extreme tiredness and pale skin,iron deficiency anaemia,ambiguous,"I'm not confident enough to map your symptoms to a specific condition from the available NHS data.
+
+Try asking with more detail or mention a specific condition if you have one in mind.",184,True,AMBIGUOUS_MEDICAL,,AMBIGUOUS_QUERY
+feeling weak and short of breath,iron deficiency anaemia,ambiguous,"I'm not confident enough to map your symptoms to a specific condition from the available NHS data.
+
+Try asking with more detail or mention a specific condition if you have one in mind.",184,True,AMBIGUOUS_MEDICAL,,AMBIGUOUS_QUERY
+fatigue and lack of energy with pale appearance,iron deficiency anaemia,ambiguous,"- Fatigue and lack of energy with a pale appearance are common symptoms of iron deficiency anaemia.
+- These symptoms occur because of a reduced number of red blood cells, which decreases oxygen delivery to tissues.
+- Your GP may perform a blood test, such as a full blood count (FBC), to diagnose the condition.
+- Treatment involves identifying and addressing the underlying cause, such as iron deficiency.
+- Self-care advice may include ensuring adequate iron intake and possibly seeing a specialist if needed.
+[Red Flag] - Seek urgent medical attention if you experience severe symptoms or signs of bleeding.
+Source : Iron deficiency anaemia",643,False,AMBIGUOUS_MEDICAL,Iron deficiency anaemia,SUCCESS
+severe upper stomach pain spreading to the back,acute pancreatitis,normal,"- The main symptom of acute pancreatitis is a severe pain that develops suddenly in the centre of your tummy, which often gets worse and can travel along your back.
+- Leaning forward or curling into a ball may help relieve the pain, but lying flat on your back often makes it worse.
+- See a GP immediately if you suddenly develop severe abdominal pain.
+- If this isn't possible, contact NHS 111 for advice.
+- You may need to be admitted to hospital for further tests and treatment.
+Source : Acute pancreatitis",509,False,KNOWN_DISEASE,,SUCCESS
+vomiting with severe abdominal pain,acute pancreatitis,normal,"- Vomiting can be a symptom associated with acute pancreatitis.
+- The main symptom of acute pancreatitis is sudden severe pain in the centre of your tummy, which can get worse and travel along your back.
+- If you experience severe abdominal pain with vomiting, see a GP immediately.
+- Seek urgent medical attention if you develop severe abdominal pain, especially if accompanied by vomiting.
+- [Red Flag] See a GP immediately if you suddenly develop severe abdominal pain.
+- If this isn't possible, contact NHS 111 for advice.
+Source : Acute pancreatitis",554,False,KNOWN_DISEASE,,SUCCESS
+sudden severe pain in upper abdomen,acute pancreatitis,normal,"- Sudden severe pain in the upper abdomen can be a symptom of acute pancreatitis.
+- The pain is often associated with inflammation of the pancreas.
+- A doctor will ask about symptoms and may feel your tummy, which will be very tender if you have acute pancreatitis.
+- Recovery from mild cases usually begins within about a week, but severe cases may take longer and can develop complications.
+- If the pain is severe and sudden, seek urgent medical attention.
+[Red Flag] - Severe, sudden abdominal pain requires urgent medical care.
+Source : Acute pancreatitis",560,False,AMBIGUOUS_MEDICAL,Acute pancreatitis,SUCCESS
+low blood pressure and dizziness,addison's disease,normal,"- Low blood pressure and dizziness can be symptoms of Addison's disease.
+- These symptoms may occur due to insufficient production of hormones like cortisol and aldosterone.
+- If experiencing these symptoms, it is important to see a GP for diagnosis and treatment.
+- With proper treatment, symptoms like low blood pressure and dizziness can be managed.
+- [Red Flag] Be aware that an adrenal crisis, which can be life-threatening, may also cause severe symptoms and requires urgent medical attention.
+Source : Addison's disease",526,False,AMBIGUOUS_MEDICAL,Addison's disease,SUCCESS
+feeling weak with weight loss and dizziness,addison's disease,normal,"I'm not confident enough to map your symptoms to a specific condition from the available NHS data.
+
+Try asking with more detail or mention a specific condition if you have one in mind.",184,True,AMBIGUOUS_MEDICAL,,AMBIGUOUS_QUERY
+ongoing fatigue with low blood pressure,addison's disease,normal,"I'm not confident enough to map your symptoms to a specific condition from the available NHS data.
+
+Try asking with more detail or mention a specific condition if you have one in mind.",184,True,AMBIGUOUS_MEDICAL,,AMBIGUOUS_QUERY
+heel pain first thing in the morning,plantar fasciitis,normal,"- Heel pain that is much worse when you first start walking after sleeping or resting is a common symptom of plantar fasciitis.
+- The pain usually improves as you start moving around but may worsen with prolonged standing, walking, or running.
+- To ease the pain, you can rest and raise your foot, apply an ice pack, wear shoes with good arch support, and try gentle stretching exercises.
+- If the pain persists or worsens, see a GP for further advice.
+Source : (Plantar fasciitis)",481,False,AMBIGUOUS_MEDICAL,Plantar fasciitis,SUCCESS
+pain under the foot after resting,plantar fasciitis,normal,"- The main symptom of plantar fasciitis is pain on the bottom of your foot, around your heel and arch.
+- It is more likely to be plantar fasciitis if the pain is much worse when you first start walking after sleeping or resting.
+- The pain gradually gets better when you start moving around but can worsen if you stand, walk, or run for a long time.
+- You can try self-care measures such as resting, applying an ice pack, wearing shoes with good arch support, and doing gentle stretching exercises.
+- If the pain does not improve within 2 weeks, see a GP.
+Source : Plantar fasciitis",582,False,AMBIGUOUS_MEDICAL,Plantar fasciitis,SUCCESS
+sharp heel pain when taking first steps,plantar fasciitis,normal,"- Sharp heel pain when taking first steps is a common symptom of plantar fasciitis.
+- The pain is usually much worse when you first start walking after sleeping or resting.
+- It may gradually get better as you move around but can worsen with prolonged standing, walking, or running.
+- You might find it painful to stretch the bottom of your foot, such as when raising your toes or walking up stairs.
+- Self-care tips include resting, applying an ice pack, wearing supportive shoes, using insoles or heel pads, and doing gentle stretching exercises.
+- If the pain does not improve within 2 weeks, see a GP.
+Source : Plantar fasciitis",632,False,AMBIGUOUS_MEDICAL,Plantar fasciitis,SUCCESS
+child avoids eye contact and struggles socially,autism,ambiguous,"I'm not confident enough to map your symptoms to a specific condition from the available NHS data.
+
+Try asking with more detail or mention a specific condition if you have one in mind.",184,True,AMBIGUOUS_MEDICAL,,AMBIGUOUS_QUERY
+child repeats behaviours and has communication difficulties,autism,normal,"- The child may show repetitive behaviours, such as flapping hands, flicking fingers, or rocking.
+- Communication difficulties may include not talking as much as other children, repeating phrases, or finding it hard to say how they feel.
+- These are common signs of autism.
+- For support, help with daily life and behaviour can be found through NHS advice.
+- [Red Flag] If the child is very upset or shows signs of distress, seek urgent medical attention.
+Source : Autism in young children",489,False,KNOWN_DISEASE,,SUCCESS
+difficulty understanding social cues in childhood,autism,ambiguous,"I'm not confident enough to map your symptoms to a specific condition from the available NHS data.
+
+Try asking with more detail or mention a specific condition if you have one in mind.",184,True,AMBIGUOUS_MEDICAL,,AMBIGUOUS_QUERY
+What is the population of India?,,refusal,This system is designed to answer NHS medical-related questions only.,69,False,NON_MEDICAL,,NON_MEDICAL
+Who won the football world cup?,,refusal,This system is designed to answer NHS medical-related questions only.,69,False,NON_MEDICAL,,NON_MEDICAL
+Explain quantum physics,,refusal,This system is designed to answer NHS medical-related questions only.,69,False,NON_MEDICAL,,NON_MEDICAL
+Best programming language to learn,,refusal,This system is designed to answer NHS medical-related questions only.,69,False,NON_MEDICAL,,NON_MEDICAL
+How do I start a business?,,refusal,This system is designed to answer NHS medical-related questions only.,69,False,NON_MEDICAL,,NON_MEDICAL
+Tell me about stock trading,,refusal,This system is designed to answer NHS medical-related questions only.,69,False,NON_MEDICAL,,NON_MEDICAL
+How do airplanes fly?,,refusal,This system is designed to answer NHS medical-related questions only.,69,False,NON_MEDICAL,,NON_MEDICAL
+Write a poem about winter,,refusal,This system is designed to answer NHS medical-related questions only.,69,False,NON_MEDICAL,,NON_MEDICAL
+What is machine learning?,,refusal,This system is designed to answer NHS medical-related questions only.,69,False,NON_MEDICAL,,NON_MEDICAL
+How do I bake a cake?,,refusal,This system is designed to answer NHS medical-related questions only.,69,False,NON_MEDICAL,,NON_MEDICAL
+Best places to visit in Europe,,refusal,This system is designed to answer NHS medical-related questions only.,69,False,NON_MEDICAL,,NON_MEDICAL
+How do I improve my resume?,,refusal,This system is designed to answer NHS medical-related questions only.,69,False,NON_MEDICAL,,NON_MEDICAL
+What is cloud computing?,,refusal,This system is designed to answer NHS medical-related questions only.,69,False,NON_MEDICAL,,NON_MEDICAL
+Tell me a funny story,,refusal,This system is designed to answer NHS medical-related questions only.,69,False,NON_MEDICAL,,NON_MEDICAL
+How does cryptocurrency work?,,refusal,This system is designed to answer NHS medical-related questions only.,69,False,NON_MEDICAL,,NON_MEDICAL
+What is the tallest mountain in the world?,,refusal,This system is designed to answer NHS medical-related questions only.,69,False,NON_MEDICAL,,NON_MEDICAL

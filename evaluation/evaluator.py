@@ -14,7 +14,6 @@ from retrieval.hybrid_retriever import HybridRetriever
 class Evaluator:
     def __init__(self):
         self.rag = RAGService()
-        self.retriever = self.rag.retriever
 
         self.input_path = os.path.join("evaluation", "test_set.csv")
         self.output_path = os.path.join("evaluation", "test_results.csv")
@@ -48,24 +47,8 @@ class Evaluator:
                 query = row["query"]
                 expected_disease = row.get("expected_disease", "")
                 query_type = row.get("type", "")
-
-                docs = self.retriever.search(query)
-
-                # Deriving predicted disease directly from retrieved docs
-                diseases = [
-                    d.metadata.get("disease", "").lower()
-                    for d in docs
-                    if d.metadata
-                ]
-
-                if diseases:
-                    predicted_disease = Counter(diseases).most_common(1)[0][0]
-                else:
-                    predicted_disease = ""
-
-                # Passing same docs into generation to avoid retrieval drift
-                response = self.rag.query_with_docs(query, docs)
-
+                result = self.rag.query_eval(query)
+                response = result["response"]
                 is_refusal = self._is_refusal(response)
 
                 results.append({
@@ -75,8 +58,10 @@ class Evaluator:
                     "response": response,
                     "response_length": len(response),
                     "is_refusal": is_refusal,
-                    "predicted_disease": predicted_disease
-                })
+                    "query_type_actual": result["query_type"],
+                    "resolved_disease": (result["resolved_disease"] or ""),
+                    "final_status": result["final_status"]
+                    })
 
         with open(self.output_path, mode="w", newline="", encoding="utf-8") as file:
             writer = csv.DictWriter(file, fieldnames=results[0].keys())
