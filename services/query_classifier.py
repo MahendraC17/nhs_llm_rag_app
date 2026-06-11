@@ -67,5 +67,6 @@ class QueryClassifier:
     # Running LLM classification and normalizing output for downstream routing
     # --------------------------------------------------------------------------------
     def classify(self, query):
+        query_lower = query.lower()
         result = self._invoke_llm(query)
         return self._validate_output(result)

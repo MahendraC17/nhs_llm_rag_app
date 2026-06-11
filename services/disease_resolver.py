@@ -44,13 +44,30 @@ class DiseaseResolver:
                 Query: "yellowing of skin and tiredness"
                 Answer: NONE
 
+                Query: "wheezing and shortness of breath"
+                Answer: asthma
+
+                Query: "painful swollen joints"
+                Answer: arthritis
+
+                Query: "joint stiffness after waking up"
+                Answer: arthritis
+
+                Query: "child struggles to sit still in class"
+                Answer: ADHD in children and young people
+
+                Query: "low blood pressure and dizziness"
+                Answer: Addison's disease
+
+                Query: "heel pain first thing in the morning"
+                Answer: plantar fasciitis
+
                 Query:
                 {query}
 
                 Answer:
                 """,
-            input_variables=["query", "disease_list"]
-        )
+            input_variables=["query", "disease_list"])
 
         self.chain = self.prompt | self.llm | StrOutputParser()
 
@@ -69,12 +86,14 @@ class DiseaseResolver:
         }).strip()
 
     def _validate_output(self, result):
-        # Enforcing strict closed-set output to avoid hallucinated diseases
-        if result == "NONE":
+        result = result.strip()
+        if result.upper() == "NONE":
             return None
 
-        if result in self.diseases:
-            return result
+        result_clean = result.lower().rstrip(".")
+        for disease in self.diseases:
+            if disease.lower() == result_clean:
+                return disease
 
         return None
 
@@ -84,4 +103,6 @@ class DiseaseResolver:
     # --------------------------------------------------------------------------------
     def match(self, query):
         result = self._invoke_llm(query)
+        print(f"Resolver Query: {query}")
+        print(f"Resolver Result: {result}")
         return self._validate_output(result)

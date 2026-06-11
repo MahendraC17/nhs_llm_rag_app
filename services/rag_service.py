@@ -126,6 +126,7 @@ class RAGService:
 
             if query_type == "AMBIGUOUS_MEDICAL":
                 disease = self.resolver.match(user_query)
+                print(f"Resolved Disease: {disease}")
                 logger.log_resolved_disease(disease)
 
                 if disease:
@@ -150,6 +151,49 @@ class RAGService:
 
     def query(self, user_query):
         return self._execute_query(user_query)
+    
+    def query_eval(self, user_query):
+        logger = RAGLogger()
+        logger.start(user_query)
+
+        if self._is_direct_disease_query(user_query):
+            query_type = "KNOWN_DISEASE"
+        else:
+            query_type = self.classifier.classify(user_query)
+
+        resolved_disease = None
+
+        if query_type == "NON_MEDICAL":
+            final_status = "NON_MEDICAL"
+
+            return {
+                "response": self.formatter.format("[NON_MEDICAL]"),
+                "query_type": query_type,
+                "resolved_disease": resolved_disease,
+                "final_status": final_status
+            }
+
+        if query_type == "AMBIGUOUS_MEDICAL":
+            resolved_disease = self.resolver.match(user_query)
+
+            if not resolved_disease:
+                final_status = "AMBIGUOUS_QUERY"
+
+                return {
+                    "response": self.formatter.format("[AMBIGUOUS_QUERY]"),
+                    "query_type": query_type,
+                    "resolved_disease": resolved_disease,
+                    "final_status": final_status
+                }
+
+        response = self.query(user_query)
+
+        return {
+            "response": response,
+            "query_type": query_type,
+            "resolved_disease": resolved_disease,
+            "final_status": "SUCCESS"
+        }
 
     def query_with_docs(self, user_query, docs):
         return self._execute_query(user_query, docs)
