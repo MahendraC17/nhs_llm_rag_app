@@ -8,13 +8,13 @@ from retrieval.faiss_engine import FAISSEngine
 
 
 class HybridRetriever:
-    def __init__(self, k_dense=5, k_sparse=5, final_k=5):
+    def __init__(self, k_dense=15, k_sparse=15, final_k=5):
         self.k_dense = k_dense
         self.k_sparse = k_sparse
         self.final_k = final_k
 
         self.bm25 = BM25Engine()
-        self.faiss = FAISSEngine()
+        self.faiss = FAISSEngine(k=self.k_dense)
 
     # --------------------------------------------------------------------------------
     # Hybrid Search Entry Point
@@ -52,5 +52,4 @@ class HybridRetriever:
         }
 
         final_docs = [content_to_doc[c] for c, _ in ranked[:self.final_k]]
-
         return final_docs

@@ -38,14 +38,14 @@ def save_fingerprint(fp):
 
 
 class FAISSEngine:
-    def __init__(self):
+    def __init__(self, k):
         os.environ["OPENAI_API_KEY"] = OPENAI_API_KEY
 
         self.embedding_model = OpenAIEmbeddings(model=EMBEDDING_MODEL)
 
         # Loading or rebuilding index based on data state using fingerprint
         self.vectorstore = self._load_or_build_index()
-        self.retriever = self.vectorstore.as_retriever(search_kwargs={"k": 5})
+        self.retriever = self.vectorstore.as_retriever(search_kwargs={"k": k})
 
     def _load_or_build_index(self):
         docs = get_documents()

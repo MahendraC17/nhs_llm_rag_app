@@ -29,7 +29,7 @@ class BM25Engine:
     # BM25 Search Entry Point
     # Scoring all documents and selecting top-k based on keyword relevance
     # --------------------------------------------------------------------------------
-    def search(self, query, k=5):
+    def search(self, query, k):
         tokenized_query = self._clean_and_tokenize(query)
         scores = self.bm25.get_scores(tokenized_query)
 
