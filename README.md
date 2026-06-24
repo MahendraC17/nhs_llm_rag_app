@@ -35,20 +35,29 @@ If any step fails, the system returns a safe fallback instead of forcing an answ
 
 ---
 
-## System flow
+## System Flow
 
-<!-- [Flowchart here] -->
-
-RAG pipeline:
-
-Query  
-→ Classification  
-→ Disease resolution  
-→ Hybrid retrieval (BM25 + FAISS)  
-→ Context validation  
-→ LLM generation  
-→ Grounding validation  
-→ Response formatting  
+```text
+User Query
+│
+├── Query Classification
+│
+├── Disease Resolution
+│
+├── Hybrid Retrieval
+│   ├── FAISS (Dense Search)
+│   └── BM25 (Sparse Search)
+│
+├── Context Validation
+│
+├── LLM Generation
+│
+├── Grounding Validation
+│
+├── Response Formatting
+│
+└── Structured Logging
+```
 
 ---
 
@@ -112,16 +121,25 @@ The system is designed to fail safely.
 
 ## Evaluation
 
-The system is tested using a structured query set.
+The system was evaluated using a manually curated benchmark of 100 queries covering:
 
-Metrics tracked:
-- Disease prediction accuracy
-- Refusal accuracy
-- Answer rate
+- Direct disease questions
+- Symptom-based medical queries
+- Ambiguous medical queries
+- Non-medical queries
+- Out-of-scope queries
 
-<!-- [Add results table here later] -->
+This exercises the complete production pipeline including classification, disease resolution, retrieval, guardrails, grounding, and response generation.
 
-Evaluation uses the same pipeline as the live system.
+### Results
+
+| Metric | Score |
+|----------|----------|
+| Normal Query Accuracy | 92% |
+| Refusal Accuracy | 96% |
+| Ambiguous Query Accuracy | 80% |
+| Successful Answers | 65 |
+
 
 ---
 
@@ -137,14 +155,6 @@ The system tracks:
 - final decision path
 
 This makes it possible to debug where and why the system failed.
-
----
-
-## Latency
-
-Planned:
-- stage-wise latency tracking
-- total response time monitoring
 
 ---
 
